@@ -28,6 +28,16 @@ export default {
   },
   plugins: [
     'react-static-plugin-typescript',
+    'react-static-plugin-css-modules',
+    [
+      "react-static-plugin-mdx",
+      {
+        mdxOptions: {
+          remarkPlugins: [/* ... */],
+          rehypePlugins: [/* ... */],
+        },
+      }
+    ],
     [
       require.resolve('react-static-plugin-source-filesystem'),
       {
