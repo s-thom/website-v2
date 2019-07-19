@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import path from 'path';
 // import { Post } from './types'
 import remarkToc from 'remark-toc';
@@ -12,23 +12,23 @@ import rehypeHighlight from 'rehype-highlight';
 export default {
   entry: path.join(__dirname, 'src', 'index.tsx'),
   getRoutes: async () => {
-    const { data: posts } /* :{ data: Post[] } */ = await axios.get(
-      'https://jsonplaceholder.typicode.com/posts'
-    );
+    // const { data: posts } /* :{ data: Post[] } */ = await axios.get(
+    //   'https://jsonplaceholder.typicode.com/posts'
+    // );
     return [
-      {
-        path: '/blog',
-        getData: () => ({
-          posts,
-        }),
-        children: posts.map((post /* : Post */) => ({
-          path: `/post/${post.id}`,
-          template: 'src/containers/Post',
-          getData: () => ({
-            post,
-          }),
-        })),
-      },
+      // {
+      //   path: '/blog',
+      //   // getData: () => ({
+      //   //   posts,
+      //   // }),
+      //   // children: posts.map((post /* : Post */) => ({
+      //   //   path: `/post/${post.id}`,
+      //   //   template: 'src/containers/Post',
+      //   //   getData: () => ({
+      //   //     post,
+      //   //   }),
+      //   // })),
+      // },
     ];
   },
   plugins: [
@@ -39,14 +39,9 @@ export default {
       {
         mdxOptions: {
           remarkPlugins: [
-            remarkEmoji,
-            remarkToc
+            remarkEmoji
           ],
-          rehypePlugins: [
-            rehypeSlug,
-            rehypeAutolinkHeadings,
-            rehypeHighlight
-          ],
+          rehypePlugins: [],
         },
       }
     ],
