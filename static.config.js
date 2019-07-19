@@ -1,6 +1,11 @@
 import axios from 'axios';
 import path from 'path';
 // import { Post } from './types'
+import remarkToc from 'remark-toc';
+import remarkEmoji from 'remark-emoji';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeHighlight from 'rehype-highlight';
 
 // Typescript support in static.config.js is not yet supported, but is coming in a future update!
 
@@ -34,13 +39,13 @@ export default {
       {
         mdxOptions: {
           remarkPlugins: [
-            'remark-emoji',
-            'remark-toc'
+            remarkEmoji,
+            remarkToc
           ],
           rehypePlugins: [
-            'rehype-slug',
-            'rehype-autolink-headings',
-            'rehype-hihglight'
+            rehypeSlug,
+            rehypeAutolinkHeadings,
+            rehypeHighlight
           ],
         },
       }
