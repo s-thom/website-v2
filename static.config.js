@@ -33,8 +33,15 @@ export default {
       "react-static-plugin-mdx",
       {
         mdxOptions: {
-          remarkPlugins: [/* ... */],
-          rehypePlugins: [/* ... */],
+          remarkPlugins: [
+            'remark-emoji',
+            'remark-toc'
+          ],
+          rehypePlugins: [
+            'rehype-slug',
+            'rehype-autolink-headings',
+            'rehype-hihglight'
+          ],
         },
       }
     ],
