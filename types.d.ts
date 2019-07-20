@@ -6,8 +6,9 @@ interface PageMetaBase {
 
 interface PageMeta extends PageMetaBase {
   github?: string;
-  date: string;
+  date?: string;
   edited?: string;
+  url?: string;
 }
 
 interface BreadcrumbSegment {
