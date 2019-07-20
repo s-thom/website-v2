@@ -1,27 +1,4 @@
-import React from 'react';
-import App, { Container } from 'next/app';
-
-export default class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    return { pageProps };
-  }
-
-  render() {
-    const { Component, pageProps } = this.props;
-
-    console.log('rendering');
-
-    return (
-      <Container>
-        hello world
-        <Component {...pageProps} />
-      </Container>
-    );
-  }
-}
+// Next (at least this version) requires that this be a Javascript file
+// Since I want everything in Typescript, this file just imports and immediately exports
+import App from '../components/App';
+export default App;
