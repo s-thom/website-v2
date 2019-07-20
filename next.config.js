@@ -1,12 +1,22 @@
-const remarkEmoji = require('remark-emoji');
-const withMDX = require('@next/mdx')({
+const withPlugins = require('next-compose-plugins');
+const mdxGenerator = require('@next/mdx');
+const withCSS = require('@zeit/next-css');
+
+const mdxOptions = {
   options: {
     remarkPlugins: [
-      remarkEmoji,
+      require('remark-emoji'),
     ],
   }
-});
+};
+const withMDX = mdxGenerator(mdxOptions);
 
-module.exports = withMDX({
-  pageExtensions: ['js', 'jsx', 'mdx'],
-});
+
+module.exports = withPlugins([
+  [withCSS, {
+    useModules: true,
+  }],
+  [withMDX, {
+    pageExtensions: ['js', 'jsx', 'mdx'],
+  }]
+], {});
