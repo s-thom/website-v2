@@ -1,11 +1,16 @@
-type PageLayoutEnum = 'Post' | 'Project';
-
-interface PageMeta {
+interface PageMetaBase {
   title: string;
-  layout: PageLayoutEnum;
   bgcolor: string;
   img?: string;
+}
+
+interface PageMeta extends PageMetaBase {
   github?: string;
   date: string;
   edited?: string;
+}
+
+interface BreadcrumbSegment {
+  name: string;
+  pathSegment: string;
 }
