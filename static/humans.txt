@@ -1,0 +1,9 @@
+/* Made By */
+Stuart Thomson
+Email: me@sthom.kiwi
+Github: https://github.com/s-thom
+
+/* SITE */
+
+Components: React
+Software: Next.js, Typescript, VS Code

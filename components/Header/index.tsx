@@ -12,7 +12,7 @@ const Header = () => (
           <div className="PageHeader-me">
             <img
               className="PageHeader-meImg"
-              src="/assets/img/me.jpg"
+              src="/static/img/me.jpg"
               alt="Portrait of Stuart Thomson"
             />
           </div>
