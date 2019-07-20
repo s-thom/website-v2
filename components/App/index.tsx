@@ -1,6 +1,7 @@
 import React from 'react';
 import App, { Container, AppInitialProps } from 'next/app';
 import { NextComponentType, NextPageContext } from 'next';
+import Header from '../Header';
 
 interface InitialPropsProps {
   Component: NextComponentType<NextPageContext, any, {}>;
@@ -23,6 +24,7 @@ export default class MyApp extends App {
 
     return (
       <Container>
+        <Header/>
         <Component {...pageProps} />
       </Container>
     );
