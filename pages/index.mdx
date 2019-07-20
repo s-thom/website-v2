@@ -1,0 +1,47 @@
+import PostHeader from '../components/PostHeader';
+import PostHeaderPreview from '../components/PostHeaderPreview';
+import PostHeaderList from '../components/PostHeaderList';
+import MdSpoiler from '../components/MdSpoiler';
+import MdImage from '../components/MdImage';
+
+
+export const postHeader = {
+  title: 'Hello',
+  date: new Date(),
+  github: 's-thom/website-v2',
+  bgcolor: '#837652',
+  breadcrumbs: [],
+};
+
+export const pagesList = [
+  postHeader,
+  {
+    title: 'bye',
+    bgcolor: '#b4d455',
+    url: '/'
+  },
+  {
+    title: 'ni',
+    bgcolor: '#b4d455',
+    url: '/'
+  },
+  {
+    title: 'boo',
+    url: '/'
+  }
+];
+
+# hello world
+
+<PostHeader {...postHeader} />
+
+:+1: :tada:
+
+<PostHeaderList pages={pagesList} />
+
+> <MdSpoiler>a :dragon: spoiler</MdSpoiler>
+> <cite>me, now</cite>
+
+<MdImage src="/static/img/banner.jpg" />
+
+<PostHeaderPreview {...postHeader} />
