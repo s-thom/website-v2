@@ -20,12 +20,14 @@
     "@typescript-eslint/eslint-plugin": "^1.12.0",
     "@typescript-eslint/parser": "^1.12.0",
     "eslint": "^6.0.1",
+    "eslint-plugin-react": "^7.14.2",
     "markdownlint": "^0.15.0"
   },
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next build && next export"
   },
   "repository": {
     "type": "git",
