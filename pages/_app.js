@@ -1,14 +1,8 @@
 import React from 'react';
-import App, { Container, AppInitialProps } from 'next/app';
-import { NextComponentType, NextPageContext } from 'next';
-
-interface InitialPropsProps {
-  Component: NextComponentType<NextPageContext, any, {}>;
-  ctx: NextPageContext;
-}
+import App, { Container } from 'next/app';
 
 export default class MyApp extends App {
-  static async getInitialProps({ Component, ctx }: InitialPropsProps): Promise<AppInitialProps> {
+  static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
 
     if (Component.getInitialProps) {
