@@ -20,6 +20,7 @@
     "@typescript-eslint/eslint-plugin": "^1.12.0",
     "@typescript-eslint/parser": "^1.12.0",
     "eslint": "^6.0.1",
+    "eslint-plugin-react": "^7.14.2",
     "markdownlint": "^0.15.0"
   },
   "scripts": {
