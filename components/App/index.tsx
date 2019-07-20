@@ -2,7 +2,9 @@ import React from 'react';
 import App, { Container, AppInitialProps } from 'next/app';
 import { NextComponentType, NextPageContext } from 'next';
 import Header from '../Header';
+import Footer from '../Footer';
 
+import './index.css';
 import './index.global.css';
 
 interface InitialPropsProps {
@@ -26,8 +28,13 @@ export default class MyApp extends App {
 
     return (
       <Container>
-        <Header/>
-        <Component {...pageProps} />
+        <div className="App">
+          <Header/>
+          <div className="App-content">
+            <Component {...pageProps} />
+          </div>
+          <Footer />
+        </div>
       </Container>
     );
   }
