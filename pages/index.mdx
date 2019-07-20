@@ -1,5 +1,7 @@
 import PostHeader from '../components/PostHeader';
 import PostHeaderPreview from '../components/PostHeaderPreview';
+import MdSpoiler from '../components/MdSpoiler';
+import MdImage from '../components/MdImage';
 
 
 export const postHeader = {
@@ -16,7 +18,9 @@ export const postHeader = {
 
 :+1: :tada:
 
-> :dragon:
+> <MdSpoiler>a :dragon: spoiler</MdSpoiler>
 > <cite>me, now</cite>
+
+<MdImage src="/static/img/banner.jpg" />
 
 <PostHeaderPreview {...postHeader} />
