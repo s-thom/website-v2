@@ -1,9 +1,12 @@
----
-title: Using React components in Markdown
-layout: Post
-date: 2017-11-12T09:20
-edited: 2017-11-22T15:45
----
+import PostHeader from '../../components/PostHeader';
+
+export const pageInfo = {
+  title: 'Using React components in Markdown',
+  date: new Date('2017-11-12T09:20'),
+  edited: new Date('2017-11-22T15:45'),
+};
+
+<PostHeader {...pageInfo} />
 
 *Edit (22 Nov 2017): Major post restructure. Simplified things a lot by removing a redundant step. Also changed the example slightly*
 
@@ -77,12 +80,12 @@ This is a **Markdown** file
 
 There are three things to keep in mind:
 
-1. You need to include the closing tag (`</MyComponent>` in this case).  
-  Custom void tags (e.g. `<MyComponent propName="..." />`) are not recognised properly by rehype, and will cause DOM nesting errors.  
+1. You need to include the closing tag (`</MyComponent>` in this case).
+  Custom void tags (e.g. `<MyComponent propName="..." />`) are not recognised properly by rehype, and will cause DOM nesting errors.
   Valid HTML void tags (like `<input>` and `<img>`) still work.
 2. All props must be strings.
-3. Element/Component names are case-insensitive.  
-  rehype, used by the processor to manage HTML, puts all tag names in lowercase.  
+3. Element/Component names are case-insensitive.
+  rehype, used by the processor to manage HTML, puts all tag names in lowercase.
   In this post, I type React components in UpperCamelCase to distinguish them from HTML elements.
 
 ### Markdown Processor
@@ -106,11 +109,11 @@ const processor = unified()
 
 Using unified is simple enough, just `use()` any plugins you need. These three are neccesary, so make sure they're included.
 
-* remark-parse  
+* remark-parse
   Transform Markdown into mdast tree (for remark plugins)
-* remark-rehype  
+* remark-rehype
   Transform mdast tree into nlcst tree (for rehype plugins)
-* rehype-react  
+* rehype-react
   Transform nlcst tree into React tree
 
 ### createElement()
@@ -137,7 +140,7 @@ function createElement(component, props, children) {
 }
 ```
 
-### MdRenderer Component 
+### MdRenderer Component
 
 This is just a small pure functional component that takes a `text` property and returns the fully rendered page.
 

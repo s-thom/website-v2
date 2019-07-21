@@ -1,9 +1,12 @@
----
-title: Using React components in Markdown (Outdated)
-layout: Post
-date: 2017-06-26T16:50
-edited: 2017-06-27T10:32
----
+import PostHeader from '../../components/PostHeader';
+
+export const pageInfo = {
+  title: 'Using React components in Markdown (Outdated)',
+  date: new Date('2017-06-26T16:50'),
+  edited: new Date('2017-06-27T10:32'),
+};
+
+<PostHeader {...pageInfo} />
 
 *An updated version of this post can be found here:*
 
@@ -137,7 +140,7 @@ This paragraph uses an <!-- MyButton {"text":"inline button"} -->. It won't stay
 BECOMES:
 
 <div>
-  This paragraph uses an 
+  This paragraph uses an
 </div>
 <MyButton>inline button</MyButton>
 <div>

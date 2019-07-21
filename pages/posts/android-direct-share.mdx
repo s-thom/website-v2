@@ -1,8 +1,12 @@
----
-title: Implementing Android's Direct Share
-layout: Post
-date: 2017-06-18T12:10
----
+import PostHeader from '../../components/PostHeader';
+
+export const pageInfo = {
+  title: 'Implementing Android\'s Direct Share',
+  bgcolor: '#15181A',
+  date: new Date('2017-06-18T12:10'),
+};
+
+<PostHeader {...pageInfo} />
 
 Android Nougat's Direct Share feature allows app developers to give a list of share targets that show at the top of the share dialog. These options reduce the number of taps required to share the information the user wants to send. Instead of `Share > Select App > Select target`, the user can go `Share > Select target`.
 
@@ -65,7 +69,7 @@ All services must be declared in the app's `AndroidManifest.xml`. This is also w
 <!-- Inside your <application> tag -->
 <service
     android:name=".MyChooserService"
-    android:enabled="true" 
+    android:enabled="true"
     android:permission="android.permission.BIND_CHOOSER_TARGET_SERVICE">
     <intent-filter>
         <action android:name="android.service.chooser.ChooserTargetService"/>
@@ -73,13 +77,13 @@ All services must be declared in the app's `AndroidManifest.xml`. This is also w
 </service>
 ```
 
-The `android.service.chooser.ChooserTargetService` intent is broadcast by the system whenever the system share dialog is created. To be able ro receive it, the Service must have the `android.permission.BIND_CHOOSER_TARGET_SERVICE` permission. 
+The `android.service.chooser.ChooserTargetService` intent is broadcast by the system whenever the system share dialog is created. To be able ro receive it, the Service must have the `android.permission.BIND_CHOOSER_TARGET_SERVICE` permission.
 
 ## Receiving the Intent
 
 ### Manifest
 
-Now the system knows it can start your service to get a list of targets, but it doesn't know where to send the share intent to. To do this, add an `intent-filter` to receive the intent. 
+Now the system knows it can start your service to get a list of targets, but it doesn't know where to send the share intent to. To do this, add an `intent-filter` to receive the intent.
 
 ```xml
 <!-- Inside your <application> tag -->
@@ -95,7 +99,7 @@ Now the system knows it can start your service to get a list of targets, but it 
     </intent-filter>
 
     <!-- ... -->
-    
+
 </activity>
 ```
 

@@ -1,9 +1,12 @@
----
-title: Four Years of Code
-layout: Post
-bgcolor: '#15181A'
-date: 2017-11-26T14:25
----
+import PostHeader from '../../components/PostHeader';
+
+export const pageInfo = {
+  title: 'Four Years of Code',
+  bgcolor: '#15181A',
+  date: new Date('2017-11-26T14:25'),
+};
+
+<PostHeader {...pageInfo} />
 
 This is a look back at some of the code I have written over the past four years, while I have been at university. Before going, I knew the absolute basic of Javascript: self taught from investigating a website that I took charge of. Now I have a deeper knowledge of how software works, and understand why it is the way it is.
 
@@ -19,7 +22,7 @@ I've tried to include one example program from each semester at the university, 
 
 One of the weekly assignments in COMP103 (the introductory course to programming) was to create a version of the infamous [Enigma Machines](https://en.wikipedia.org/wiki/Enigma_machine). It had to read in the rotor values from a CSV file, then cyphertext from a text file, and convert it to plaintext, as well as the reverse.
 
-![Minimal UI design of the Enigma simulator](/assets/posts/4yrs-code/enigma.png)
+![Minimal UI design of the Enigma simulator](/static/posts/4yrs-code/enigma.png)
 
 One of the tutors gave us an encrypted file. Its contents were "THE FIRST PERSON TO SEE &lt;name of the tutor&gt; AND SAY PEANUT SLAB WILL GET [A PEANUT SLAB](https://www.whittakers.co.nz/en_NZ/products/#trigger--slabs)". I don't like Peanut Slabs, so I ended up giving it to a friend.
 
@@ -31,7 +34,7 @@ Based off the card game [Get Bit!](https://www.maydaygames.com/collections/get-b
 
 This was the final assignment of COMP104, and was set to show our understanding of Object-Oriented design. All students had to create their own version of the card game, and implement various AI player types.
 
-![The game screen of Get Bit!](/assets/posts/4yrs-code/get-bit.png)
+![The game screen of Get Bit!](/static/posts/4yrs-code/get-bit.png)
 
 We also had to do an extra on top of just creating the game. I created a primitive XML-based save format, so games could be saved and then loaded. This used the .NET XML library to do the conversion, and taught me how to do serialization in a strongly typed environment.
 
@@ -39,7 +42,7 @@ We also had to do an extra on top of just creating the game. I created a primiti
 
 **Personal Project**
 
-[Download (.exe)](/assets/posts/4yrs-code/WaitingGame.exe)
+[Download (.exe)](/static/posts/4yrs-code/WaitingGame.exe)
 
 This was just a random thing I made to troll friends. It features a loading bar, which <Spoiler text="doesn't ever finish"></Spoiler>, and plays music (<Spoiler text="the 'troll song'"></Spoiler>).
 
@@ -55,13 +58,13 @@ Unfortunately, I've lost the code for it. No great loss, though it was how I lea
 
 This assignment was set to assess many different things:
 
-1. **Object-Oriented program design**  
+1. **Object-Oriented program design**
   That was the focus of COMP204
-1. **Programming in groups**  
+1. **Programming in groups**
   This assignment was set for pairs of people. I worked with someone I met in the halls the previous year: [Tim](http://tmh.nz). I knew a little about git at this point, so decided to use it for this project, allowing us to work on different areas of the app at the same time. Not quite classic pair programming, but it still turned out well.
-1. **Android's lifecycle**  
+1. **Android's lifecycle**
   Always an important thing to learn. This paper touched on why it was important, but more explanation came in COMP548.
-1. **Using sensors**  
+1. **Using sensors**
   Sensors are what set mobile development apart from normal development. Thre's a weath of device information that can be gathered. This game needed to use the gyroscope to determine device orientation, and use that in the game.
 
 Tim and I were able to complete our task, and create a game where a ball moves with gravity. So did everyone else in the class, of course. Theat was the goal of the assignment. It was interesting to look at other groups' apps and see how they were different.
@@ -70,25 +73,25 @@ Tim and I were able to complete our task, and create a game where a ball moves w
 
 **Personal Project**
 
-*[Repository (#1)](https://github.com/SecretOnline/NMS-Info/)*  
+*[Repository (#1)](https://github.com/SecretOnline/NMS-Info/)*
 *[Repository (#2)](https://github.com/SecretOnline/Info-Repo/)*
 
 It was around this time that the video game [No Man's Sky](https://www.nomanssky.com/). Information on the game was relatively scarce, but work had been done on the [subreddit](https://www.reddit.com/r/NoMansSkyTheGame/) to collect it all. However, it was a bit of an annoyance to search through and provide links to. I set out to create an easily linkable and searchable collection of all the information about the game, complete with the sources for the information.
 
-![The first version of the Info Repo](/assets/posts/4yrs-code/nmsir1.png)
+![The first version of the Info Repo](/static/posts/4yrs-code/nmsir1.png)
 
 The website ended up being relatively popular throughout the community, which was fantastic. I kept it open source and ad-free, and worked with another group who were building their own NMS-related website. I also completely rewrote it, which allowed me to experiment with server side rendering for the first time.
 
-![The updated version of the Info Repo](/assets/posts/4yrs-code/nmsir2.jpg)
+![The updated version of the Info Repo](/static/posts/4yrs-code/nmsir2.jpg)
 
 I learned two major things in making the Info Repo:
 
-1. **UI/UX Design**  
-  While I had the basics before, this provided me with an opportunity to try new things, and really focus on how a website looked and felt. This ended up being my go-to look for all web projects I did for the next year. Inspiration from it still exists in most of my later projects.  
+1. **UI/UX Design**
+  While I had the basics before, this provided me with an opportunity to try new things, and really focus on how a website looked and felt. This ended up being my go-to look for all web projects I did for the next year. Inspiration from it still exists in most of my later projects.
   By doing this, I learned that I actually liked design. Thinking about how users interact with software, and how we can reinforce the right behaviours, is an interesting subject. This project made me realise how important design (visual, application, user experience) is to software.
-1. **The React framework**  
-  Version 1 of the website was created without any libraries. Just pure Javascript. It showed me how I could create a full interactive single-page website. I learned a lot about DOM manipulation and trying to keep a larger file organised.  
-  Version 2 was written using the React framework. This meant that I didn't have to directly worry about the DOM, and instead just declare the structure of the application.  
+1. **The React framework**
+  Version 1 of the website was created without any libraries. Just pure Javascript. It showed me how I could create a full interactive single-page website. I learned a lot about DOM manipulation and trying to keep a larger file organised.
+  Version 2 was written using the React framework. This meant that I didn't have to directly worry about the DOM, and instead just declare the structure of the application.
   The Info Repo proved to be a valuable practical lesson in using the React library, which I have used in many of my personal projects since.
 
 # Third Year
@@ -129,7 +132,7 @@ In the end, I believe we were one of the few groups to finish that assignment, a
 
 [Repository (#1)](https://github.com/SecretOnline/NMS-irc-bot/)  
 [Repository (#2)](https://github.com/SecretOnline/secret_bot/)  
-[Repository (#3)](https://github.com/SecretOnline/bo/t)
+[Repository (#3)](https://github.com/SecretOnline/bot)
 
 bot is probably the single project I have kept going for the longest period of time. What started off as a simple IRC bot has evolved into a bit more than a simple bot. This project was actually started around the same time as the [NMS Info Repo](#nms-information-repository), but it took a little longer to get off the ground.
 

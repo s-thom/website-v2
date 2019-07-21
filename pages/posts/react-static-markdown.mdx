@@ -1,9 +1,12 @@
----
-title: Using Markdown with React Static
-layout: Post
-date: 2017-11-23T15:45
-edited: 2018-05-20T11:48
----
+import PostHeader from '../../components/PostHeader';
+
+export const pageInfo = {
+  title: 'Using Markdown with React Static',
+  date: new Date('2017-11-23T15:45'),
+  edited: new Date('2018-05-20T11:48'),
+};
+
+<PostHeader {...pageInfo} />
 
 *Edit (20 May 2018): Updated to support React Static 5.0.0+*
 
