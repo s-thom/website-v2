@@ -1,3 +1,5 @@
+declare module '@mdx-js/react';
+
 interface PageMetaBase {
   title: string;
   bgcolor: string;
