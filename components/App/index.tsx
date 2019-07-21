@@ -8,12 +8,13 @@ import './index.css';
 import './index.global.css';
 
 interface InitialPropsProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Component: NextComponentType<NextPageContext, any, {}>;
   ctx: NextPageContext;
 }
 
 export default class MyApp extends App {
-  static async getInitialProps({ Component, ctx }: InitialPropsProps): Promise<AppInitialProps> {
+  public static async getInitialProps({ Component, ctx }: InitialPropsProps): Promise<AppInitialProps> {
     let pageProps = {};
 
     if (Component.getInitialProps) {
@@ -23,7 +24,7 @@ export default class MyApp extends App {
     return { pageProps };
   }
 
-  render() {
+  public render() {
     const { Component, pageProps } = this.props;
 
     return (

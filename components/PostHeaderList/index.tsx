@@ -37,9 +37,7 @@ export default function PostHeaderList({
           <li className="PostHeaderList-item" key={ info.title }>
             {info.url ? (
               <Link href={info.url}>
-                <a>
-                  {item}
-                </a>
+                {item}
               </Link>
             ) : item}
           </li>
