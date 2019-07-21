@@ -8,6 +8,7 @@ import Footer from '../Footer';
 import './index.css';
 import './index.global.css';
 import Link from '../Link';
+import MdImage from '../MdImage';
 
 interface InitialPropsProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,6 +22,7 @@ interface ComponentMap {
 
 const componentsMap: ComponentMap = {
   a: Link,
+  img: MdImage,
 };
 
 export default class MyApp extends App {
