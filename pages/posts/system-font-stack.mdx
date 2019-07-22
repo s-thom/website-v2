@@ -4,6 +4,8 @@ export const metadata = {
   title: 'The "system" font stack',
   bgcolor: '#15181A',
   date: new Date('2018-05-19T18:39'),
+  published: true,
+  featured: true,
 };
 
 <PostHeader {...metadata} />
@@ -26,15 +28,15 @@ This means that the user will see the best font available, without needing to do
 
 ## Parts of the stack
 
-* `system-ui`
+* `system-ui`  
   Chrome 56 added [support for system-ui](https://www.chromestatus.com/feature/5640395337760768), which acts like the rest of the system font stack, but won't need to change if system manufacturers update their design in the future.
-* `-apple-system`
+* `-apple-system`  
   Apple added their own keyword for using the system font: `-apple-system`.
   Why not just `system`? Well, that's because Windows has its own font named `system` in older versions of Windows.
   There's an interesting [post by the Medium design team](https://medium.design/system-shock-6b1dc6d6596f) on this as they were looking at updating their design.
-* `BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue'`
+* `BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue'`  
   These are the default fonts on most systems.
-* `sans-serif`
+* `sans-serif`  
   Finally, if neither of the previous items matched, then use the default sans-serif font of the browser.
 
 If no glyph was found, then the browser will display � instead.
@@ -43,12 +45,12 @@ If no glyph was found, then the browser will display � instead.
 
 There are two main advantages to using the system font stack:
 
-1. Users do not need to download any new fonts when they visit your page
-  Font imports are render-blocking in CSS, and will pause the loading of your page until they are downloaded.
+1. Users do not need to download any new fonts when they visit your page  
+  Font imports are render-blocking in CSS, and will pause the loading of your page until they are downloaded.  
   This can be a major problem when on mobile networks, as this costs users more data and causes slower load times.
-2. The font fits in with the rest of the device's visual style
-  Using the system default typeface means that the user is already familiar with the style of characters on your website, making it fit in with the rest of the device.
-  The user does not need to spend time deciphering the new typeface, which is especially important for people with reading disabilities like dyslexia.
+2. The font fits in with the rest of the device's visual style  
+  Using the system default typeface means that the user is already familiar with the style of characters on your website, making it fit in with the rest of the device.  
+  The user does not need to spend time deciphering the new typeface, which is especially important for people with   reading disabilities like dyslexia.
 
 ![Even if that font is one of Samsung's...](https://core0.staticworld.net/images/article/2014/04/newfonts-100261130-medium.idge.png)
 
