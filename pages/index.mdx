@@ -1,16 +1,21 @@
 import PostHeader from '../components/PostHeader';
+import PostHeaderList from '../components/PostHeaderList';
+import Link from '../components/Link';
+import { getFeaturedPosts } from '../data/metadata';
 
-export const postHeader = {
+export const metadata = {
   title: 'Stuart Thomson',
   img: '/static/img/banner.jpg',
 };
 
-<PostHeader {...postHeader} />
+<PostHeader {...metadata} />
 
 I'm a random person on the internet! I'm currently working as a Software Developer in New Zealand. I went to the [University of Waikato](https://waikato.ac.nz), and graduated with a Bachelor's of Computing and Mathematical Sciences (Hons., First Class). I enjoy writing code, playing music, and walking (over mountains, through forests, around gardens. Anything really).
 
 You'll find a bunch of different projects over at [GitHub](https://github.com/s-thom). Some are even listed below. I welcome contributions to my projects; fork, branch, and make a Pull Request.
 
-# Some posts
+# Highlighted posts
 
-Or <
+These are some of the latest posts on the site, or you can [view them all](/posts).
+
+<PostHeaderList pages={getFeaturedPosts()} />
