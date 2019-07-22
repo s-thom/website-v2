@@ -1,10 +1,15 @@
----
-title: Colour Tool
-layout: Project
-github: s-thom/colour-tool
-date: 2018-10-01T00:00
-bgcolor: '#756BB0'
----
+import PostHeader from '../../components/PostHeader';
+
+export const metadata = {
+  title: 'Colour Tool',
+  bgcolor: '#756BB0',
+  date: new Date('2018-10-01T00:00'),
+  github: 's-thom/colour-tool',
+  published: true,
+  featured: true,
+};
+
+<PostHeader {...metadata} />
 
 Colour tool is a work-in-progress website for dealing with colours in different colour spaces. I eventually plan to extend it to have more features, such as generating gradients. It's built using the [chroma.js library](https://gka.github.io/chroma.js/), which made dealing with the different colour spaces really easy.
 

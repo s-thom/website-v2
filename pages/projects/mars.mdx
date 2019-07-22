@@ -1,11 +1,16 @@
----
-title: Mars
-layout: Project
-bgcolor: '#BD4A2E'
-github: s-thom/MarsAndroid
-date: 2017-06-18T12:00
-edited: 2017-11-23T09:41
----
+import PostHeader from '../../components/PostHeader';
+
+export const metadata = {
+  title: 'Mars',
+  bgcolor: '#BD4A2E',
+  date: new Date('2017-06-18T12:00'),
+  edited: new Date('2017-11-23T09:41'),
+  github: 's-thom/MarsAndroid',
+  published: true,
+  featured: true,
+};
+
+<PostHeader {...metadata} />
 
 Sometimes I feel like dropping what I'm working on, and taking up another project for a weekend. That's exactly what sparked the creation of Mars.
 

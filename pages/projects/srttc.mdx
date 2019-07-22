@@ -1,10 +1,15 @@
----
-title: Simple Run-time Type Checker
-layout: Project
-github: s-thom/srttc
-date: 2018-09-17T00:00
-bgcolor: '#CB3837'
----
+import PostHeader from '../../components/PostHeader';
+
+export const metadata = {
+  title: 'Simple Run-time Type Checker',
+  bgcolor: '#CB3837',
+  date: new Date('2018-09-17T00:00'),
+  github: 's-thom/srttc',
+  published: true,
+  featured: true,
+};
+
+<PostHeader {...metadata} />
 
 srttc is a Javascript library for checking the types of object during run time. It was born out of the want to check the validity of API call responses during development, so that the responses were verified to be valid (or at least identical to the specification). I built it so that it was easy to use, defining the structure of objects naturally, as you would in normal Javascript. As such, it ends up being extremely fast to use.
 
