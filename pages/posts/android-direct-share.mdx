@@ -1,12 +1,12 @@
 import PostHeader from '../../components/PostHeader';
 
-export const pageInfo = {
+export const metadata = {
   title: 'Implementing Android\'s Direct Share',
   bgcolor: '#15181A',
   date: new Date('2017-06-18T12:10'),
 };
 
-<PostHeader {...pageInfo} />
+<PostHeader {...metadata} />
 
 Android Nougat's Direct Share feature allows app developers to give a list of share targets that show at the top of the share dialog. These options reduce the number of taps required to share the information the user wants to send. Instead of `Share > Select App > Select target`, the user can go `Share > Select target`.
 

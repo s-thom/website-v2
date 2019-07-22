@@ -1,19 +1,31 @@
 declare module '@mdx-js/react';
 
-interface PageMetaBase {
+export interface PageMetaBase {
   title: string;
   bgcolor: string;
   img?: string;
 }
 
-interface PageMeta extends PageMetaBase {
+export interface PageMeta extends PageMetaBase {
   github?: string;
   date?: string;
   edited?: string;
   url?: string;
 }
 
-interface BreadcrumbSegment {
+export interface PageMetadata {
+  title: string;
+  published?: boolean;
+  featured?: boolean;
+  bgcolor?: string;
+  img?: string;
+  github?: string;
+  date?: Date;
+  edited?: Date;
+  path?: string;
+}
+
+export interface BreadcrumbSegment {
   name: string;
   pathSegment: string;
 }
