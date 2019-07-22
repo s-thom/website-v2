@@ -34,6 +34,18 @@ function getPageMeta(pagePath) {
  * @param {PageMetadata} pageMeta
  * @returns {boolean}
  */
+function filterPublishedPages(pageMeta) {
+  return (
+    pageMeta.published &&
+    true // This line is purely for making diffs nicer if more conditions are added
+  );
+}
+
+/**
+ * Filter featured pages
+ * @param {PageMetadata} pageMeta
+ * @returns {boolean}
+ */
 function filterFeaturedPages(pageMeta) {
   return (
     pageMeta.published &&
@@ -83,16 +95,26 @@ function sortPages(a, b) {
  * @param {string} folderPath
  * @returns {PageMetadata[]}
  */
-function getFeaturedPages(folderPath) {
+function getAllPages(folderPath) {
   return fs
     .readdirSync(path.join(PAGES_DIR, folderPath))
     .filter(file => file.match(PAGE_REGEX))
     .map((filename) => getPageMeta(path.join(folderPath, filename)))
-    .filter(filterFeaturedPages)
+    .filter(filterPublishedPages)
     .sort(sortPages);
+}
+
+/**
+ * @param {string} folderPath
+ * @returns {PageMetadata[]}
+ */
+function getFeaturedPages(folderPath) {
+  return getAllPages(folderPath)
+    .filter(filterFeaturedPages);
 }
 
 module.exports = {
   getPageMeta,
+  getAllPages,
   getFeaturedPages,
 };

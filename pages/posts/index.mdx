@@ -1,6 +1,6 @@
-import preval from 'babel-plugin-preval/macro';
 import PostHeader from '../../components/PostHeader';
 import PostHeaderList from '../../components/PostHeaderList';
+import { getAllPosts } from '../../data/metadata';
 
 export const metadata = {
   title: 'All Posts',
@@ -10,6 +10,6 @@ export const metadata = {
 
 Sometimes I write about things that I've been doing or that interest me. This is where those writings go.
 
-export const subpages = preval`module.exports = require('../../data/metaGetter').getFeaturedPages('posts')`;
+export const subpages = getAllPosts();
 
 <PostHeaderList pages={subpages} />
