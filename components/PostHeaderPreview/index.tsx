@@ -1,11 +1,11 @@
 import React, { CSSProperties } from 'react';
+import { PageMetadata } from '../../types';
 
 // Poach styles from header, that way it only needs to be written once
 import '../PostHeader/index.css';
 import './index.css';
 
-interface Props extends PageMetaBase {
-  url?: string;
+interface Props extends PageMetadata {
   showUrl?: boolean;
 }
 
@@ -13,7 +13,7 @@ export default function PostHeaderPreview({
   title,
   img,
   bgcolor,
-  url,
+  path,
   showUrl = false,
 }: Props) {
   const headList = [];
@@ -35,8 +35,8 @@ export default function PostHeaderPreview({
     headList.push(<h1 className="PostHeader-heading" key="title">{ title }</h1>);
   }
 
-  if (showUrl && url) {
-    headList.push(<p className="PostHeader-url" key="url">{url}</p>);
+  if (showUrl && path) {
+    headList.push(<p className="PostHeader-url" key="url">{path}</p>);
   }
 
   return (
