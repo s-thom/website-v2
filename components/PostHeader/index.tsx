@@ -2,12 +2,13 @@ import React, { CSSProperties } from 'react';
 
 import Link from '../Link';
 import { dateStr } from '../util';
-import { PageMetadata, BreadcrumbSegment } from '../../types';
+import { PageMetadata } from '../../types';
 
 import './index.css';
 
-interface PostHeaderProps extends PageMetadata {
-  breadcrumbs?: BreadcrumbSegment[];
+interface BreadcrumbSegment {
+  name: string;
+  pathSegment: string;
 }
 
 export default function PostHeader({
@@ -17,8 +18,8 @@ export default function PostHeader({
   date,
   edited,
   github,
-  breadcrumbs,
-}: PostHeaderProps) {
+  path,
+}: PageMetadata) {
   const headList = [];
   const headStyle: CSSProperties = {};
   const headClasses = ['PostHeader'];
@@ -74,33 +75,57 @@ export default function PostHeader({
   }
 
   // Breadcrumbs
-  if (breadcrumbs && breadcrumbs.length) {
-    const crumbs: JSX.Element[] = [];
+  if (path) {
+    const breadcrumbs: BreadcrumbSegment[] = path
+      .split('/')
+      .filter(Boolean) // Remove leading and trailing slashes
+      .map((segment, index, arr) => {
+        if (index === 0) {
+          return {
+            name: 'Home',
+            pathSegment: segment,
+          };
+        } else if (index === (arr.length - 1)) {
+          return {
+            name: title,
+            pathSegment: segment,
+          };
+        } else {
+          return {
+            name: segment,
+            pathSegment: segment,
+          };
+        }
+      });
 
-    for (let i = 0; i < breadcrumbs.length; i++) {
-      const crumb = breadcrumbs[i];
+    if (breadcrumbs.length > 1) {
+      const crumbs: JSX.Element[] = [];
 
-      // Add separator if not the first item
-      if (i !== 0) {
-        crumbs.push(<span key={`spacer-${i}`}> &gt; </span>);
+      for (let i = 0; i < breadcrumbs.length; i++) {
+        const crumb = breadcrumbs[i];
+
+        // Add separator if not the first item
+        if (i !== 0) {
+          crumbs.push(<span key={`spacer-${i}`}> &gt; </span>);
+        }
+
+        // Get full path for this segment
+        const path = breadcrumbs
+          .slice(0, i + 1)
+          .map((segment) => segment.pathSegment)
+          .join('/');
+
+        crumbs.push(
+          <Link href={`/${path}`} key={`bc-${i}`}>
+            <a className="PostHeader-crumb">
+              {crumb.name}
+            </a>
+          </Link>
+        );
       }
 
-      // Get full path for this segment
-      const path = breadcrumbs
-        .slice(0, i + 1)
-        .map((segment) => segment.pathSegment)
-        .join('/');
-
-      crumbs.push(
-        <Link href={`/${path}`} key={`bc-${i}`}>
-          <a className="PostHeader-crumb">
-            {crumb.name}
-          </a>
-        </Link>
-      );
+      headList.push(<nav className="PostHeader-breadcrumbs" key="breadcrumbs">{crumbs}</nav>);
     }
-
-    headList.push(<nav className="PostHeader-breadcrumbs" key="breadcrumbs">{crumbs}</nav>);
   }
 
   return (

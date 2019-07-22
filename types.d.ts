@@ -9,8 +9,3 @@ export interface PageMetadata {
   edited?: Date;
   path?: string;
 }
-
-export interface BreadcrumbSegment {
-  name: string;
-  pathSegment: string;
-}
