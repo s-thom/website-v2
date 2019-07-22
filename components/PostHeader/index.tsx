@@ -2,10 +2,11 @@ import React, { CSSProperties } from 'react';
 
 import Link from '../Link';
 import { dateStr } from '../util';
+import { PageMetadata, BreadcrumbSegment } from '../../types';
 
 import './index.css';
 
-interface PostHeaderProps extends PageMeta {
+interface PostHeaderProps extends PageMetadata {
   breadcrumbs?: BreadcrumbSegment[];
 }
 
@@ -41,7 +42,7 @@ export default function PostHeader({
   if (pageDate) {
     dateNodes.push((
       <p className="PostHeader-date" key="PostHeader-dateOriginal">
-        <em><time dateTime={date}>
+        <em><time dateTime={pageDate.toISOString()}>
           {dateStr(pageDate)}
         </time></em>
       </p>

@@ -1,5 +1,3 @@
-declare module '@mdx-js/react';
-
 export interface PageMetaBase {
   title: string;
   bgcolor: string;
