@@ -128,6 +128,7 @@ export default function PostHeader({
         const path = breadcrumbs
           .slice(0, i + 1)
           .map((segment) => segment.pathSegment)
+          .filter(Boolean)
           .join('/');
 
         crumbs.push(
