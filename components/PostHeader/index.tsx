@@ -1,4 +1,5 @@
 import React, { CSSProperties } from 'react';
+import { useRouter } from 'next/router';
 
 import Link from '../Link';
 import { dateStr } from '../util';
@@ -11,6 +12,10 @@ interface BreadcrumbSegment {
   pathSegment: string;
 }
 
+interface PostHeaderProps extends PageMetadata {
+  showBreadcrumbs?: boolean;
+}
+
 export default function PostHeader({
   title,
   img,
@@ -19,7 +24,10 @@ export default function PostHeader({
   edited,
   github,
   path,
-}: PageMetadata) {
+  showBreadcrumbs = true,
+}: PostHeaderProps) {
+  const router = useRouter();
+
   const headList = [];
   const headStyle: CSSProperties = {};
   const headClasses = ['PostHeader'];
@@ -75,17 +83,16 @@ export default function PostHeader({
   }
 
   // Breadcrumbs
-  if (path) {
-    const breadcrumbs: BreadcrumbSegment[] = path
+  if (showBreadcrumbs) {
+    const crumbsPath = path || router.pathname;
+
+    console.log(crumbsPath);
+
+    const breadcrumbs: BreadcrumbSegment[] = crumbsPath
       .split('/')
       .filter(Boolean) // Remove leading and trailing slashes
       .map((segment, index, arr) => {
-        if (index === 0) {
-          return {
-            name: 'Home',
-            pathSegment: segment,
-          };
-        } else if (index === (arr.length - 1)) {
+        if (index === (arr.length - 1)) {
           return {
             name: title,
             pathSegment: segment,
@@ -97,6 +104,14 @@ export default function PostHeader({
           };
         }
       });
+
+    // Add home page on front if needed
+    if (crumbsPath.match(/^\//)) {
+      breadcrumbs.unshift({
+        name: 'Home',
+        pathSegment: '',
+      });
+    }
 
     if (breadcrumbs.length > 1) {
       const crumbs: JSX.Element[] = [];
@@ -116,10 +131,8 @@ export default function PostHeader({
           .join('/');
 
         crumbs.push(
-          <Link href={`/${path}`} key={`bc-${i}`}>
-            <a className="PostHeader-crumb">
-              {crumb.name}
-            </a>
+          <Link className="PostHeader-crumb" href={`/${path}`} key={`bc-${i}`}>
+            {crumb.name}
           </Link>
         );
       }
