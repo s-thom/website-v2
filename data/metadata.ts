@@ -10,17 +10,17 @@ export function getAllPosts() {
   return pages;
 }
 
-// export function getAllProjects() {
-//   const pages: PageMetadata[] = preval([`module.exports = require('./metaGetter').getAllPages('projects')`]);
-//   return pages;
-// }
+export function getAllProjects() {
+  const pages: PageMetadata[] = preval([`module.exports = require('./metaGetter').getAllPages('projects')`]);
+  return pages;
+}
 
 export function getFeaturedPosts() {
   const pages: PageMetadata[] = preval([`module.exports = require('./metaGetter').getFeaturedPages('posts')`]);
   return pages;
 }
 
-// export function getFeaturedProjects() {
-//   const pages: PageMetadata[] = preval([`module.exports = require('./metaGetter').getFeaturedPages('projects')`]);
-//   return pages;
-// }
+export function getFeaturedProjects() {
+  const pages: PageMetadata[] = preval([`module.exports = require('./metaGetter').getFeaturedPages('projects')`]);
+  return pages;
+}

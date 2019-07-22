@@ -1,7 +1,7 @@
 import PostHeader from '../components/PostHeader';
 import PostHeaderList from '../components/PostHeaderList';
 import Link from '../components/Link';
-import { getFeaturedPosts } from '../data/metadata';
+import { getFeaturedPosts, getFeaturedProjects } from '../data/metadata';
 
 export const metadata = {
   title: 'Stuart Thomson',
@@ -14,8 +14,14 @@ I'm a random person on the internet! I'm currently working as a Software Develop
 
 You'll find a bunch of different projects over at [GitHub](https://github.com/s-thom). Some are even listed below. I welcome contributions to my projects; fork, branch, and make a Pull Request.
 
-# Highlighted posts
+# Highlighted Posts
 
 These are some of the latest posts on the site, or you can [view them all](/posts).
 
 <PostHeaderList pages={getFeaturedPosts()} />
+
+# Highlighted Projects
+
+Here's a sample of the projects I've done. You can [view them all here](/posts).
+
+<PostHeaderList pages={getFeaturedProjects()} />
