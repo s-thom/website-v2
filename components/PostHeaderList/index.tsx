@@ -1,12 +1,13 @@
 import React from 'react';
+import Link from '../Link';
 
 import PostHeaderPreview from '../PostHeaderPreview';
-import Link from 'next/link';
+import { PageMetadata } from '../../types';
 
 import './index.css';
 
 interface Props {
-  pages: PageMeta[];
+  pages: PageMetadata[];
   showTypes?: boolean;
 }
 
@@ -35,11 +36,9 @@ export default function PostHeaderList({
 
         return (
           <li className="PostHeaderList-item" key={ info.title }>
-            {info.url ? (
-              <Link href={info.url}>
-                <a>
-                  {item}
-                </a>
+            {info.path ? (
+              <Link href={info.path}>
+                {item}
               </Link>
             ) : item}
           </li>

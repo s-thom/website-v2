@@ -1,17 +1,13 @@
-interface PageMetaBase {
+export interface PageMetadata {
   title: string;
-  bgcolor: string;
+  description?: string;
+  published?: boolean;
+  featured?: boolean;
+  bgcolor?: string;
   img?: string;
-}
-
-interface PageMeta extends PageMetaBase {
   github?: string;
-  date?: string;
-  edited?: string;
-  url?: string;
-}
-
-interface BreadcrumbSegment {
-  name: string;
-  pathSegment: string;
+  date?: Date;
+  edited?: Date;
+  path?: string;
+  tags?: string[];
 }

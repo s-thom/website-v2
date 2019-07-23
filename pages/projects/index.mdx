@@ -1,0 +1,13 @@
+import PostHeader from '../../components/PostHeader';
+import PostHeaderList from '../../components/PostHeaderList';
+import allProjects from '../../data/allProjects';
+
+export const metadata = {
+  title: 'All Projects',
+};
+
+<PostHeader {...metadata} />
+
+Here are some of the things I have worked on in the past. In these posts I look into some of the areas of these projects to show some of the more interesting parts within.
+
+<PostHeaderList pages={allProjects} />
