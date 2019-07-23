@@ -1,4 +1,5 @@
 import PostHeader from '../../components/PostHeader';
+import LargeLink from '../../components/LargeLink';
 
 export const metadata = {
   title: 'Using React components in Markdown',
@@ -10,6 +11,8 @@ export const metadata = {
 <PostHeader {...metadata} />
 
 *Edit (22 Nov 2017): Major post restructure. Simplified things a lot by removing a redundant step. Also changed the example slightly*
+
+*Edit (23 Jul 2019): Javascript, and this website, have changed enough that this post is no longer relevant. If you want to read it, it is still here. However, there are better ways of acomplishing these goals now ([MDX](https://mdxjs.com) is probably the best bet right now). As such, the examples on this page will be broken*
 
 ---
 
@@ -165,7 +168,7 @@ This post you're reading is [using the very code](https://github.com/s-thom/webs
 All you need to do is write out your element.
 
 <Expandable>
-  <Link url="/posts/react-in-markdown-updated/" title="This Post"></Link>
+  <LargeLink href="/posts/react-in-markdown-updated/" title="This Post" />
 </Expandable>
 
 Just like you would in JSX
@@ -176,7 +179,7 @@ Becomes:
 All you need to do is write out your element.
 
 <Expandable>
-  <Link url="/posts/react-in-markdown-updated/" title="This Post"></Link>
+  <LargeLink href="/posts/react-in-markdown-updated/" title="This Post" />
 </Expandable>
 
 Just like you would in JSX
