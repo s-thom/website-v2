@@ -3,6 +3,7 @@ import App, { Container } from 'next/app';
 import {MDXProvider} from '@mdx-js/react';
 import Header from '../Header';
 import Footer from '../Footer';
+import DefaultHeadMetadata from '../DefaultHeadMetadata';
 
 import './index.css';
 import './index.global.css';
@@ -24,6 +25,7 @@ export default class MyApp extends App {
 
     return (
       <Container>
+        <DefaultHeadMetadata />
         <MDXProvider components={componentsMap}>
           <div className="App">
             <Header/>
