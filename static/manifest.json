@@ -5,6 +5,7 @@
   "theme_color": "#15181A",
   "background_color": "#FEFEFE",
   "display": "standalone",
+  "scope": "/",
   "icons": [
     {
       "src": "/static/icon/48.png",
