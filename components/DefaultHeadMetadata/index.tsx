@@ -8,6 +8,7 @@ export default function DefaultHeadMetadata() {
       <meta name="charset"  content="utf-8" key="charset" />
       <meta name="viewport"  content="width=device-width, initial-scale=1" key="viewport" />
       <meta property="og:site_name" content="Stuart Thomson" key="og-site_name" />
+      <meta property="og:type" content="website" key="og-type" />
       <meta name="theme-color"  content="#15181A" key="theme-color" />
       <meta name="msapplication-TileColor"  content="#15181A" key="ms-tilecolor" />
       <meta name="apple-mobile-web-app-status-bar"  content="black-transparent" key="apple-status-bar" />
