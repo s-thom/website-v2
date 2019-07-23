@@ -8,6 +8,9 @@ const mdxOptions = {
     remarkPlugins: [
       require('remark-emoji'),
     ],
+    rehypePlugins: [
+      require('@mapbox/rehype-prism'),
+    ],
   }
 };
 const withMDX = mdxGenerator(mdxOptions);

@@ -7,6 +7,7 @@ import DefaultHeadMetadata from '../DefaultHeadMetadata';
 
 import './index.css';
 import './index.global.css';
+import 'prismjs/themes/prism-tomorrow.css';
 import Link from '../Link';
 import MdImage from '../MdImage';
 
