@@ -1,0 +1,9 @@
+.LargeLink {
+  color: inherit;
+}
+
+.LargeLink:hover,
+.LargeLink:focus,
+.LargeLink:active {
+  color: inherit;
+}
