@@ -19,8 +19,8 @@ export default function DefaultHeadMetadata() {
       <meta name="msapplication-square150x150logo"  content="/static/icon/ms-150.png" key="ms-icon-150" />
       <meta name="msapplication-square70x70logo"  content="/static/icon/ms-70.png" key="ms-icon-70" />
       {/* General Properties */}
-      <link rel="author" href="/humans.txt" key="humans" />
-      <link rel="manifest" href="/manifest.json" key="manifest" />
+      <link rel="author" href="/static/humans.txt" key="humans" />
+      <link rel="manifest" href="/static/manifest.json" key="manifest" />
       {/* Icons */}
       <link rel="icon" sizes="196x196" href="/static/icon/196.png" key="icon-196" />
       <link rel="icon" sizes="144x144" href="/static/icon/144.png" key="icon-144" />
