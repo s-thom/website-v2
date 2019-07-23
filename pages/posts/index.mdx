@@ -1,6 +1,6 @@
 import PostHeader from '../../components/PostHeader';
 import PostHeaderList from '../../components/PostHeaderList';
-import { getAllPosts } from '../../data/metadata';
+import allPosts from '../../data/allPosts';
 
 export const metadata = {
   title: 'All Posts',
@@ -10,4 +10,4 @@ export const metadata = {
 
 Sometimes I write about things that I've been doing or that interest me. This is where those writings go.
 
-<PostHeaderList pages={getAllPosts()} />
+<PostHeaderList pages={allPosts} />

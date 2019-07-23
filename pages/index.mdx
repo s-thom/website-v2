@@ -1,7 +1,8 @@
 import PostHeader from '../components/PostHeader';
 import PostHeaderList from '../components/PostHeaderList';
 import Link from '../components/Link';
-import { getFeaturedPosts, getFeaturedProjects } from '../data/metadata';
+import featuredPosts from '../data/featuredPosts';
+import featuredProjects from '../data/featuredProjects';
 
 export const metadata = {
   title: 'Stuart Thomson',
@@ -18,10 +19,10 @@ You'll find a bunch of different projects over at [GitHub](https://github.com/s-
 
 These are some of the latest posts on the site, or you can [view them all](/posts).
 
-<PostHeaderList pages={getFeaturedPosts()} />
+<PostHeaderList pages={featuredPosts} />
 
 # Highlighted Projects
 
 Here's a sample of the projects I've done. You can [view them all here](/posts).
 
-<PostHeaderList pages={getFeaturedProjects()} />
+<PostHeaderList pages={featuredProjects} />
