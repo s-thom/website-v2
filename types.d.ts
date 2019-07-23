@@ -1,5 +1,6 @@
 export interface PageMetadata {
   title: string;
+  description?: string;
   published?: boolean;
   featured?: boolean;
   bgcolor?: string;
@@ -8,4 +9,5 @@ export interface PageMetadata {
   date?: Date;
   edited?: Date;
   path?: string;
+  tags?: string[];
 }

@@ -2,6 +2,7 @@ import React, { CSSProperties } from 'react';
 import { useRouter } from 'next/router';
 
 import Link from '../Link';
+import PostHeadMetadata from '../PostHeadMetadata';
 import { dateStr } from '../util';
 import { PageMetadata } from '../../types';
 
@@ -16,16 +17,17 @@ interface PostHeaderProps extends PageMetadata {
   showBreadcrumbs?: boolean;
 }
 
-export default function PostHeader({
-  title,
-  img,
-  bgcolor,
-  date,
-  edited,
-  github,
-  path,
-  showBreadcrumbs = true,
-}: PostHeaderProps) {
+export default function PostHeader(props: PostHeaderProps) {
+  const {
+    title,
+    img,
+    bgcolor,
+    date,
+    edited,
+    github,
+    path,
+    showBreadcrumbs = true,
+  } = props;
   const router = useRouter();
 
   const headList = [];
@@ -83,11 +85,8 @@ export default function PostHeader({
   }
 
   // Breadcrumbs
+  const crumbsPath = path || router.pathname;
   if (showBreadcrumbs) {
-    const crumbsPath = path || router.pathname;
-
-    console.log(crumbsPath);
-
     const breadcrumbs: BreadcrumbSegment[] = crumbsPath
       .split('/')
       .filter(Boolean) // Remove leading and trailing slashes
@@ -144,6 +143,7 @@ export default function PostHeader({
 
   return (
     <header className={headClasses.join(' ')} style={headStyle}>
+      <PostHeadMetadata {...props} path={crumbsPath} />
       {titleElement}
       <div className="PostHeader-detail">
         <div className="PostHeader-items">
