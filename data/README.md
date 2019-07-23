@@ -6,10 +6,10 @@ Because I want this site to be statically generated, I need a way to get the lis
 
 Has functions to do the reading or whatever.
 
-## `get[All/Featured][Posts/Projects].ts`
+## `[all/featured][Posts/Projects].ts`
 
 Use the macro to always export the data.
 
-Why are they in their own files? This is to assist with Webpack's tree shaking. If they're all in one file then Webpack doesn't remove the unused functions, so having extra files ensures that only the relevant data is provided to the correct pages.
+Why are they in their own files? This is to assist with Webpack's tree shaking. If they're all in one file then Webpack doesn't remove the unused variables, so having extra files ensures that only the relevant data is provided to the correct pages.
 
-Note that you can't just have a function and call that with whatever directory you want. Since the execution is done at compile time there's no way to pass parameters (as the code isn't actually being run). So there needs to be a separate function for each bit of data.
+Note that you can't just have a function and call that with whatever directory you want. Since the execution is done at compile time there's no way to pass parameters (as the code isn't actually being run). So there needs to be a separate variable for each bit of data.
