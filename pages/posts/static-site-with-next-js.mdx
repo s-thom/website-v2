@@ -1,0 +1,137 @@
+import PostHeader from '../../components/PostHeader';
+import MdSpoiler from '../../components/MdSpoiler';
+import LargeLink from '../../components/LargeLink';
+
+export const metadata = {
+  title: 'Creating a static website with Next.js',
+  img: '/static/img/banner.jpg',
+  date: new Date('2019-07-24T17:40'),
+  github: 's-thom/website-v2',
+  published: true,
+  featured: true,
+};
+
+<PostHeader {...metadata} />
+
+This post goes into a few details of the problems I came up against while re-creating my website with [Next.js](https://nextjs.org/). This is not a tutorial, you can find plenty of those around.
+
+## What is a static website, anyway?
+
+Put simply, it's a website that doesn't get generated on a server when your browser asks for it. A static website can still run Javascript or have fancy transition effects. Static, in this context, refers to how the content is served and not what the content itself is.
+
+Because I don't want to write my entire website in raw HTML (I'd rather use Markdown, as it's easier to read when writing), I use something to turn my Markdown into a full webpage. I've used [Phenomic](https://phenomic.io/) and [React Static](https://react-static.js.org/) in the past. Each library/generator has their own ideas, and it's good to see which ones work for you.
+
+## What I wanted
+
+I already had my website set up with [React Static]() in the past, so I wan't exactly breaking ground here. I did have a few things I wanted to do while starting all over again:
+
+1. Genrate pages statically so they can be served with a plain webserver.
+1. Use [MDX](https://mdxjs.com). Previously I had [hacked in a way of using React components in Markdown](/posts/react-in-markdown), but I wanted to avoid doing that again.
+1. Keep everything looking the same. I already had components for elements like <MdSpoiler>spoiler tags</MdSpoiler> that I wanted to keep. I'd even created a replacement for the `<img>` tag that automatically added captions.
+1. Not have the overhead of having the collections of pages served with every page.
+
+## Generating pages statically with Next.js
+
+OK, I'll admit it. I got too far into this rewrite before actually checking this. Luckily for my time management, you can export a static version of your site by adding an entry into your package.json scripts:
+
+```json
+{
+  "scripts": {
+    "export": "next build && next export"
+  }
+}
+```
+
+and running `npm run export` as part of the build process. All the files will be available in the `out/` directory.
+
+## MDX in Next.js
+
+[MDX](https://mdxjs.com) is a way of including [JSX](https://reactjs.org/docs/introducing-jsx.html) (a way of including XML in Javascript) in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). The usefulness of all these layers is that you can now include React components in the rest of the content of the page (such as the spoiler tag I used as an example above).
+
+There is a plugin for using MDX with Next.js. You'll need to create a `next.config.js` in the root of the repository, and add something similar to the following:
+
+```js
+const mdxGenerator = require('@next/mdx');
+
+const mdxOptions = {
+  options: {
+    remarkPlugins: [
+      require('remark-emoji'), // :tada:
+    ],
+    rehypePlugins: [
+      require('@mapbox/rehype-prism'), // Syntax highlighting
+    ],
+  }
+};
+const withMDX = mdxGenerator(mdxOptions);
+
+
+module.exports = withMDX({
+  // Any Next.js options you need
+});
+```
+
+I've also shown how to include plugins for MDX in that example, so now you don't need to scroll through another screen's height of blog post to see that.
+
+##  Using existing React components in a new React framework
+
+I could recap what I did previously before MDX was a big thing, but the [original post I wrote](/posts/react-in-markdown-updated) has enough detail.
+
+The MDX package for React exports a Context provider that allows you to specify a mapping of element names to React components. This allows me to use the replacements I have for `<a>` and `<img>` elements that I used on the previous version of this website.
+
+```jsx
+import {MDXProvider} from '@mdx-js/react';
+
+// App.tsx
+const componentsMap: ComponentMap = {
+  a: Link,
+  img: MdImage,
+};
+
+// ... 
+
+render() {
+  // ...
+  <MDXProvider components={componentsMap}>
+    {/* ... */}
+  </MDXProvider>
+  // ...
+}
+```
+
+Since I want to use more components than just replacements for existing HTML elements, I still need a way of including others. Previously this was done by adding more entries to the map, but now I'm using MDX: I can just import them and use them.
+
+```
+import LargeLink from '../../components/LargeLink';
+
+<LargeLink href="https://github.com/s-thom/website-v2" title="An example link"/>
+```
+
+## Indexes and listing pages statically
+
+With two of the issues out of the way, it's time to tackle the collections of pages.
+
+All was going well up until this point. This particular thing, which sounds so simple, was by far the most challenging aspect of rebuilding the website.
+
+All I wanted was to list all pages in the directory on the indexes (e.g. list all posts on [/posts](/posts)). There's a couple of steps to this:
+
+1. Get a list of pages
+2. Get the metadata for the pages
+
+Step 2 is kinda important, as I want to include the theme colour or main image of a post in that link on the /posts page. The problem is that I can't ask the page to get all of the pages when it's in the browser, as the browser doesn't know. I could have a server running that has a list of all the pages (such as a CMS), but then it's not a static website.
+
+So all this had to be done at build time. It could be done as a pre-build step, but that just doesn't feel right. So, I did some Googling.
+
+If there's anything to take away from this post, it's that the following people are awesome:
+
+* [Juan Olvera](https://twitter.com/_jolvera), for writing the [blog post that sent me in the right direction](https://dev.to/jolvera/rebuilding-my-blog-with-next-js-1h84) and explained what I needed to do.
+* [Max Stoiber](https://twitter.com/mxstbr), for writing the [website that Juan used as inspiration](https://github.com/mxstbr/mxstbr.com).
+* [Kent Dodds](https://twitter.com/kentcdodds), for writing the [Babel plugin/macro that Max used](https://github.com/kentcdodds/babel-plugin-preval), and is really really awesome in what it does.
+
+There'll be other propler out there who deserve thanks as well, and I hope they recieve it. For now I'll leave a link to how I solved the problem of getting the metadata from all of the posts.
+
+<LargeLink href="https://github.com/s-thom/website-v2/tree/next/master/data" title="My implementation of using preval to list posts"/>
+
+## Why does this post exist
+
+So that maybe, one day, someone makes the same decisions I did, and is wondering what problems they may come up against in creating a static website with a framework that wasn't originally designed for it. Maybe they'll find this post useful, like I found Juan's post and Max's website. And maybe they'll share their experiences and challenges. If you're reading this post, then that person might just be you.
