@@ -53,16 +53,22 @@ export default function PostHeader(props: PostHeaderProps) {
   if (pageDate) {
     dateNodes.push((
       <p className="PostHeader-date" key="PostHeader-dateOriginal">
-        <em><time dateTime={pageDate.toISOString()}>
-          {dateStr(pageDate)}
-        </time></em>
+        <em>
+          <time dateTime={pageDate.toISOString()}>
+            {dateStr(pageDate)}
+          </time>
+        </em>
       </p>
     ));
   }
   if (editDate) {
     dateNodes.push((
       <p className="PostHeader-date" key="PostHeader-dateEdited">
-        <em key={editDate.toISOString()}>Edited: {dateStr(editDate)}</em>
+        <em>
+          <time dateTime={editDate.toISOString()}>
+            Edited: {dateStr(editDate)}
+          </time>
+        </em>
       </p>
     ));
   }
@@ -70,7 +76,7 @@ export default function PostHeader(props: PostHeaderProps) {
   // Add GitHub URL
   if (github) {
     headList.push((
-      <p className="PostHeader-github">
+      <p className="PostHeader-github" key="github">
         <Link href={`https://github.com/${github}`}>
           <span className="PostHeader-svg">
             <svg viewBox="0 0 24 24">
