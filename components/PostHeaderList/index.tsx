@@ -35,7 +35,7 @@ export default function PostHeaderList({
         );
 
         return (
-          <li className="PostHeaderList-item" key={ info.title }>
+          <li className="PostHeaderList-item" key={ info.path }>
             {info.path ? (
               <Link href={info.path}>
                 {item}
