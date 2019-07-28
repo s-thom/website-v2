@@ -47,7 +47,7 @@ export default function PageMeta({
 
   if (tags) {
     tags.forEach((t) => {
-      meta.push(<meta property="article:tag" content={t} />);
+      meta.push(<meta property="article:tag" content={t} key={`og-tag-${t}`} />);
     });
   }
 
