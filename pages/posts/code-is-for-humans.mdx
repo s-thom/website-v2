@@ -1,0 +1,25 @@
+import PostHeader from '../../components/PostHeader';
+
+export const metadata = {
+  title: 'Code is for Humans',
+  description: 'On priorities when writing code',
+  date: new Date('2019-08-03T09:06'),
+  published: true,
+  featured: true,
+};
+
+<PostHeader {...metadata} />
+
+There are some sayings in software development that get thrown around fairly often. Usually as jokes, but the best jokes are based on reality. One of the more common ones is:
+
+> Always code as if the guy who ends up maintaining your code will be a
+violent psychopath who knows where you live.
+> <cite><a href="https://groups.google.com/forum/#!msg/comp.lang.c++/rYCO5yn4lXw/oITtSkZOtoUJ">John F. Woods</a></cite>
+
+Ultimately this, and many others, come down to one core idea:
+
+# Code is for humans
+
+Computers don't run code, they run the result of compiling or interpreting the code. Modern compilers and interpreters can do a lot of the strange optimisations for you. Editors don't need to hold the full conceptual overview of what the codebase does. The only part of this system that is restricted is the person in the chair.
+
+This doesn't always hold, there are exceptions. If you're working closer to the hardware, then you need to think about what is actually running on the hardware, which may need some sacrifice to human readiability. Some one-liners are just too cool not to use. And reading a random blog post on the internet is not a formal education in how you should write code. Write code that is best for the job, and the psychopath that will see it later.
