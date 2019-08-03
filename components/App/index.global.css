@@ -104,7 +104,7 @@ blockquote::before {
   left: 4px;
   display: inline-block;
   content: '';
-  background-image: url('/assets/quote.svg');
+  background-image: url('/static/quote.svg');
   background-size: 1em;
   font-size: 1.2em;
   width: 1em;
