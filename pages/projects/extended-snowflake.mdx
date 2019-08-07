@@ -1,0 +1,68 @@
+import PostHeader from '../../components/PostHeader';
+import LargeLink from '../../components/LargeLink';
+
+export const metadata = {
+  title: 'Extended Snowflake',
+  description: 'Twitter-like Snowflakes for the future',
+  bgcolor: '#5374cc',
+  date: new Date('2019-08-07T20:00'),
+  github: 's-thom/extended-snowflake',
+  published: true,
+  featured: true,
+};
+
+<PostHeader {...metadata} />
+
+I've been planning a slightly larger project for a while, and so have been looking in to various things that will be needed. One of those was ID generation.
+
+## Inspiration
+
+Both Twitter and Discord use a system known as [Snowflakes](https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake.html) (because they're unique, get it?). They're 64 bit identifiers made of a timestamp since some epoch, some way of identifying the process that created the ID, and a counter. Each process can create 4096 IDs per millisecond, and there can be up to 1024 processes defined.
+
+```
++-------------------------------------------------------------+
+|                      Twitter Snowflake                      |
++--------+-----------------+------------------------+---------+
+| 1 bit  | 41 bits         | 10 bits                | 12 bits |
++--------+-----------------+------------------------+---------+
+| Unused | #ms since epoch | Machine ID             | Counter |
++--------+-----------------+------------------------+---------+
+
++-------------------------------------------------------------+
+|                      Discord Snowflake                      |
++--------+-----------------+-----------+------------+---------+
+| 1 bit  | 41 bits         | 5 bits    | 5 bits     | 12 bits |
++--------+-----------------+-----------+------------+---------+
+| Unused | #ms since epoch | Worker ID | Process ID | Counter |
++--------+-----------------+-----------+------------+---------+
+```
+
+Twitter's epoch is in November 2010, while Discord's is the first millisecond of 2015. You'll also notice that Discord split their Machine ID to a worker and process ID, which more closely matches their architecture.
+
+## The problem(s)
+
+The first issue I saw when looking at the Snowflake format is that there are only 41 bits for the timestamp, which is a bit less than 70 years. This means that there are people with Twitter and Discord accounts that will live until after the time that these services can generate IDs using their current methods.
+
+The other issue is that I do a lot of Javascript development. Javascript doesn't have a 64 bit integer type; all numbers are double precision floats. Having the numbers as floats means that Javascript can't parse a Snowflake as a number. Twitter had to add a string field to their APIs, and Discord uses strings for all their IDs.
+
+## The solution
+
+```
++--------------------+-------------------------------------------------------------+
+|     Extension      |                      Generic Snowflake                      |
++---------+----------+--------+-----------------+-----------+------------+---------+
+| 8 bits  | 8 bits   | 1 bit  | 41 bits         | 5 bits    | 5 bits     | 12 bits |
++---------+----------+--------+-----------------+-----------+------------+---------+
+| Version | Epoch ID | Unused | #ms since epoch | Worker ID | Process ID | Counter |
++---------+----------+--------+-----------------+-----------+------------+---------+
+```
+
+My solution to the timestamp problem is to add 8 bits to the front to represent the epoch period. Each period lasts 50 years (less than the 70 it could be, but rounder for humans to use), and when it's complete it increments the epoch ID. This allows the dates to reach up to the year 14799. I hope by then we'll have a better way fo generating IDs.
+
+To solve the number size problem, I represent the Snowflakes as hex strings, so they take up slightly less space than as number strings.
+
+I also added a version field to the front, so ther can be different Snowflake types for different uses. While I can't think of many uses for a different Snowflake format, this system allows for it.
+
+I've created an NPM package for these Extended Snowflakes, which you can view at the link below.
+
+<LargeLink href="https://www.npmjs.com/package/extended-snowflake" title="NPM Package" />
