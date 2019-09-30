@@ -6,7 +6,7 @@
 
 [[redirects]]
   from = "/.well-known/*"
-  to = "/dot-well-known/:splat"
+  to = "/static/dot-well-known/:splat"
   status = 200
   force = true
   [redirects.headers]
