@@ -1,0 +1,34 @@
+import PostHeader from "../components/PostHeader";
+import PostHeaderList from "../components/PostHeaderList";
+import Link from "../components/Link";
+import MdImage from "../components/MdImage";
+import important from "../data/important-videos.json";
+
+export const metadata = {
+  title: "Important Videos",
+  description: "A collection of the things I find on the internet"
+};
+
+<PostHeader {...metadata} />
+
+The title of this page is an in-joke. "Watch this important video" was generally followed by a phone appearing in your face with something definietly not important. I want to take that concept, and spin it back around.
+
+The videos and articles listed below are a collection of the things that I find while on the internet. I want to focus on interesting takes on topic I enjoy, which means that things range from programming, to music, to art, to games, to history, and pretty much anywhere.
+
+Standard disclaimer of "these are not my opinions" and "my thoughts may have changed since I added things here", but obviously these things had enough impact that I wanted to share them somewhere. Not just anywhere, but somewhere more personal.
+
+export const sortedLinks = important.sort(
+  (a, b) => new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime()
+);
+
+<div>
+  {sortedLinks.map(link => (
+    <div>
+      <h3>
+        <Link href={link.link}>{link.title}</Link> -{" "}
+        <Link href={link.creator.link}>{link.creator.name}</Link>
+        <img alt={link.title} src={link.img} nocaption />
+      </h3>
+    </div>
+  ))}
+</div>
