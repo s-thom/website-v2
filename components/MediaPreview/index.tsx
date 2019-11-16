@@ -48,18 +48,35 @@ export default function MediaPreview({ media }: MediaPreviewProps) {
     undefined
   );
 
+  const image = media.img ? (
+    <MdImage
+      className="MediaPreview-img"
+      alt={media.title}
+      src={media.img}
+      nocaption
+    />
+  ) : (
+    undefined
+  );
+  const imageLink =
+    image && media.link ? (
+      <Link
+        href={media.link}
+        className="MediaPreview-img-wrapper MediaPreview-img-wrapper-link"
+      >
+        {image}
+      </Link>
+    ) : (
+      <span className="MediaPreview-img-wrapper">{image}</span>
+    );
+
   return (
     <div className="MediaPreview">
       <h3 className="MediaPreview-heading">
         {titleLink}
         {creatorLink && <> - {creatorLink}</>}
       </h3>
-      <MdImage
-        className="MediaPreview-img"
-        alt={media.title}
-        src={media.img}
-        nocaption
-      />
+      {imageLink}
     </div>
   );
 }
