@@ -1,9 +1,29 @@
 [
   {
+    "title": "The Smallest MIDI Synth Again...",
+    "img": "https://img.youtube.com/vi/KTvVS8guBsY/maxresdefault.jpg",
+    "link": "https://www.youtube.com/watch?v=KTvVS8guBsY",
+    "author": {
+      "name": "mitxela",
+      "link": "https://www.youtube.com/channel/UCeEf90AEmmxaQs5BUkHqR3Q"
+    },
+    "dateAdded": "2019-11-16T07:11:11.951Z"
+  },
+  {
+    "title": "\"Hello, world\" from scratch on a 6502",
+    "img": "https://img.youtube.com/vi/uqY3FMuMuRo/maxresdefault.jpg",
+    "link": "https://www.youtube.com/watch?v=uqY3FMuMuRo",
+    "author": {
+      "name": "Ben Eater",
+      "link": "https://www.youtube.com/user/eaterbc"
+    },
+    "dateAdded": "2019-11-03T07:11:11.951Z"
+  },
+  {
     "title": "Museum Theft",
     "img": "https://img.youtube.com/vi/ETAcIbzOTYs/maxresdefault.jpg",
     "link": "https://www.youtube.com/watch?v=ETAcIbzOTYs",
-    "creator": {
+    "author": {
       "name": "Jacob Geller",
       "link": "https://www.youtube.com/user/yacobg42"
     },
@@ -13,7 +33,7 @@
     "title": "Corporate Music - How to Compose with no Soul",
     "img": "https://img.youtube.com/vi/AIxY_Y9TGWI/maxresdefault.jpg",
     "link": "https://www.youtube.com/watch?v=AIxY_Y9TGWI",
-    "creator": {
+    "author": {
       "name": "Tantacrul",
       "link": "https://www.youtube.com/user/martinthekearykid"
     },
@@ -23,7 +43,7 @@
     "title": "Understanding Thriller",
     "img": "https://img.youtube.com/vi/xCL_b48-H7Q/maxresdefault.jpg",
     "link": "https://www.youtube.com/watch?v=xCL_b48-H7Q",
-    "creator": {
+    "author": {
       "name": "12tone",
       "link": "https://www.youtube.com/channel/UCTUtqcDkzw7bisadh6AOx5w"
     },
@@ -31,9 +51,9 @@
   },
   {
     "title": "w",
-    "img": "https://img.youtube.com/vi/sg2j7mZ9-2Y/maxresdefault.jpg",
+    "img": "https://img.youtube.com/vi/sg2j7mZ9-2Y/hqdefault.jpg",
     "link": "https://www.youtube.com/watch?v=sg2j7mZ9-2Y",
-    "creator": {
+    "author": {
       "name": "Conlang Critic",
       "link": "https://www.youtube.com/user/HBMmaster8472"
     },
