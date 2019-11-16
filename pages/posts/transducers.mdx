@@ -11,3 +11,54 @@ export const metadata = {
 };
 
 <PostHeader {...metadata} />
+
+This one is going to be a bit different. I'm going to write this post as I go, writing down what I'm figuring out at each stage. Most articles are written from the end point, once people have understood everything, which can make reading about an unfamiliar topic quite intimidating.
+
+## Friday, 15th November 2019
+
+While waiting for long builds, I sometimes look at articles. I remembered reading about transducers a long time ago, getting an idea of what they do, but still getting intimidated by what I was reading.
+
+Today was no different, but I decided to let it sit for a while and look at them again over the weekend.
+
+## Saturday 16th November 2019
+
+Not much in the way of research. I did read through some of [this article](https://medium.com/javascript-scene/transducers-efficient-data-processing-pipelines-in-javascript-7985330fe73d), and the [documentation for Clojure](https://clojure.org/reference/transducers) (a language I've used in university, but not since).
+
+At this stage I'm not sure I actually want to look into transducers, or just focus in on [Javascript's iterators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators) as a way of dealing with collection operations. I'll start off with iterators, then see if I can use learnings from that to move up to transducers.
+
+## Sunday 17th November 2019
+
+I've also been thinking of the interface that I'd like to use eventually. I am more used to the normal functional methods for working with collections in Javascript/Typescript.
+
+```ts
+[
+  /* ... */
+]
+  .filter(/* ... */)
+  .map(/* ... */)
+  .reduce(/* ... */);
+```
+
+Which can be summarised as "with this data, do these things".
+
+Transducers seem to be the other way around, defining the operations, then using those on the data. The most commonly used library for Javascript, or at least the most written about, is [ramda](https://ramdajs.com/).
+
+```ts
+import { compose, filter, map, into, range } from "ramda";
+
+const isEven = n => n % 2 === 0;
+const square = n => n * n;
+
+const squareEvenNumbers = compose(filter(isEven), map(square));
+
+const arr = range(1, 7);
+const result = into([], squareEvenNumbers, arr); // [4, 16, 36]
+```
+
+Calls `filter(isEven)` don't do any processing, and return a new function. `compose` takes the functions it is passed and calls them in the order provided. Confusingly, this is called "right-to-left". The reason for that is it eventually becomes something like `map(filter(data))`. Adding log statements into the above snippet does show that it filters the odd numbers out before squaring the remaining numbers.
+
+One thing I want to point out is that a few articles make the claim that "transducers work with any data type, not just arrays". I want to clarify this. They work, as long as the functions you are using them with work with that data type. You can't just shove an object into the above snippet and expect it to work. Transducers, the concept, work with any data type but a transducer, as in an actual instance, will only work with the correct data type.
+
+The structure of the code is different to the normal Javascript one. It's more of the form "do these things, here's my data".
+
+I'd like to keep something similar to Javascript's style, where the data comes first, but that just doesn't fit how the tool should be used. You should be able to use the same transducer on multiple bits of data (assuming the types allow). I do prefer the "vertical" style of function chaining to the single call to `compose`, at least for now. It certainly makes type definitions easier.
