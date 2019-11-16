@@ -24,15 +24,25 @@ interface MediaPreviewProps extends PageMetadata {
 
 export default function MediaPreview({ media }: MediaPreviewProps) {
   const titleLink = media.link ? (
-    <Link href={media.link}>{media.title}</Link>
+    <Link
+      className="MediaPreview-title MediaPreview-title-link"
+      href={media.link}
+    >
+      {media.title}
+    </Link>
   ) : (
-    <span>{media.title}</span>
+    <span className="MediaPreview-title">{media.title}</span>
   );
   const creatorLink = media.author ? (
     media.author.link ? (
-      <Link href={media.author.link}>{media.author.name}</Link>
+      <Link
+        className="MediaPreview-author MediaPreview-author-link"
+        href={media.author.link}
+      >
+        {media.author.name}
+      </Link>
     ) : (
-      <span>{media.author.name}</span>
+      <span className="MediaPreview-author">{media.author.name}</span>
     )
   ) : (
     undefined
@@ -40,11 +50,16 @@ export default function MediaPreview({ media }: MediaPreviewProps) {
 
   return (
     <div className="MediaPreview">
-      <h3>
+      <h3 className="MediaPreview-heading">
         {titleLink}
         {creatorLink && <> - {creatorLink}</>}
       </h3>
-      <MdImage alt={media.title} src={media.img} nocaption />
+      <MdImage
+        className="MediaPreview-img"
+        alt={media.title}
+        src={media.img}
+        nocaption
+      />
     </div>
   );
 }

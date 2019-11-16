@@ -10,7 +10,7 @@ export default function MdImage(props: MdImageProps) {
   if (props.nocaption) {
     const clone = { ...props };
     delete clone.nocaption;
-    return <img {...props} />;
+    return <img {...clone} />;
   }
 
   const caption = props.title || props.alt;
