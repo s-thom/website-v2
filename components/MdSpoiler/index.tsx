@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import './index.css';
+import "./index.css";
 
 interface Props {
   title?: string;
@@ -11,9 +11,9 @@ interface Props {
 }
 
 export default function MdSpoiler({
-  title = 'Spoiler',
+  title = "Spoiler",
   text,
-  children,
+  children
 }: React.PropsWithChildren<Props>) {
   return (
     <span className="MdSpoiler">

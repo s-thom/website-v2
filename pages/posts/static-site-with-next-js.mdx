@@ -1,15 +1,15 @@
-import PostHeader from '../../components/PostHeader';
-import MdSpoiler from '../../components/MdSpoiler';
-import LargeLink from '../../components/LargeLink';
+import PostHeader from "../../components/PostHeader";
+import MdSpoiler from "../../components/MdSpoiler";
+import LargeLink from "../../components/LargeLink";
 
 export const metadata = {
-  title: 'Creating a static website with Next.js',
-  description: 'The challenges I came up against when rebuilding my website',
-  img: '/static/img/banner.jpg',
-  date: new Date('2019-07-24T17:40'),
-  github: 's-thom/website-v2',
+  title: "Creating a static website with Next.js",
+  description: "The challenges I came up against when rebuilding my website",
+  img: "/static/img/banner.jpg",
+  date: new Date("2019-07-24T17:40"),
+  github: "s-thom/website-v2",
   published: true,
-  featured: true,
+  featured: true
 };
 
 <PostHeader {...metadata} />
@@ -52,20 +52,19 @@ and running `npm run export` as part of the build process. All the files will be
 There is a plugin for using MDX with Next.js. You'll need to create a `next.config.js` in the root of the repository, and add something similar to the following:
 
 ```js
-const mdxGenerator = require('@next/mdx');
+const mdxGenerator = require("@next/mdx");
 
 const mdxOptions = {
   options: {
     remarkPlugins: [
-      require('remark-emoji'), // :tada:
+      require("remark-emoji") // :tada:
     ],
     rehypePlugins: [
-      require('@mapbox/rehype-prism'), // Syntax highlighting
-    ],
+      require("@mapbox/rehype-prism") // Syntax highlighting
+    ]
   }
 };
 const withMDX = mdxGenerator(mdxOptions);
-
 
 module.exports = withMDX({
   // Any Next.js options you need
@@ -74,7 +73,7 @@ module.exports = withMDX({
 
 I've also shown how to include plugins for MDX in that example, so now you don't need to scroll through another screen's height of blog post to see that.
 
-##  Using existing React components in a new React framework
+## Using existing React components in a new React framework
 
 I could recap what I did previously before MDX was a big thing, but the [original post I wrote](/posts/react-in-markdown-updated) has enough detail.
 
@@ -89,7 +88,7 @@ const componentsMap: ComponentMap = {
   img: MdImage,
 };
 
-// ... 
+// ...
 
 render() {
   // ...
@@ -125,13 +124,16 @@ So all this had to be done at build time. It could be done as a pre-build step, 
 
 If there's anything to take away from this post, it's that the following people are awesome:
 
-* [Juan Olvera](https://twitter.com/_jolvera), for writing the [blog post that sent me in the right direction](https://dev.to/jolvera/rebuilding-my-blog-with-next-js-1h84) and explained what I needed to do.
-* [Max Stoiber](https://twitter.com/mxstbr), for writing the [website that Juan used as inspiration](https://github.com/mxstbr/mxstbr.com).
-* [Kent Dodds](https://twitter.com/kentcdodds), for writing the [Babel plugin/macro that Max used](https://github.com/kentcdodds/babel-plugin-preval), and is really really awesome in what it does.
+- [Juan Olvera](https://twitter.com/_jolvera), for writing the [blog post that sent me in the right direction](https://dev.to/jolvera/rebuilding-my-blog-with-next-js-1h84) and explained what I needed to do.
+- [Max Stoiber](https://twitter.com/mxstbr), for writing the [website that Juan used as inspiration](https://github.com/mxstbr/mxstbr.com).
+- [Kent Dodds](https://twitter.com/kentcdodds), for writing the [Babel plugin/macro that Max used](https://github.com/kentcdodds/babel-plugin-preval), and is really really awesome in what it does.
 
 There'll be other propler out there who deserve thanks as well, and I hope they recieve it. For now I'll leave a link to how I solved the problem of getting the metadata from all of the posts.
 
-<LargeLink href="https://github.com/s-thom/website-v2/tree/next/master/data" title="My implementation of using preval to list posts"/>
+<LargeLink
+  href="https://github.com/s-thom/website-v2/tree/next/master/data"
+  title="My implementation of using preval to list posts"
+/>
 
 ## Why does this post exist
 

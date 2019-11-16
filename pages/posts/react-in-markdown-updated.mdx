@@ -1,19 +1,19 @@
-import PostHeader from '../../components/PostHeader';
-import LargeLink from '../../components/LargeLink';
+import PostHeader from "../../components/PostHeader";
+import LargeLink from "../../components/LargeLink";
 
 export const metadata = {
-  title: 'Using React components in Markdown',
-  description: '(Outdated) How to add React components to Markdown documents',
-  date: new Date('2017-11-12T09:20'),
-  edited: new Date('2017-11-22T15:45'),
-  published: true,
+  title: "Using React components in Markdown",
+  description: "(Outdated) How to add React components to Markdown documents",
+  date: new Date("2017-11-12T09:20"),
+  edited: new Date("2017-11-22T15:45"),
+  published: true
 };
 
 <PostHeader {...metadata} />
 
-*Edit (22 Nov 2017): Major post restructure. Simplified things a lot by removing a redundant step. Also changed the example slightly*
+_Edit (22 Nov 2017): Major post restructure. Simplified things a lot by removing a redundant step. Also changed the example slightly_
 
-*Edit (23 Jul 2019): Javascript, and this website, have changed enough that this post is no longer relevant. If you want to read it, it is still here. However, there are better ways of acomplishing these goals now ([MDX](https://mdxjs.com) is probably the best bet right now). As such, the examples on this page will be broken*
+_Edit (23 Jul 2019): Javascript, and this website, have changed enough that this post is no longer relevant. If you want to read it, it is still here. However, there are better ways of acomplishing these goals now ([MDX](https://mdxjs.com) is probably the best bet right now). As such, the examples on this page will be broken_
 
 ---
 
@@ -30,11 +30,11 @@ The Markdown specification allows you to write HTML inside the Markdown file, an
 ```js
 // MdRenderer.jsx
 
-import React from 'react';
-import unified from 'unified';
-import remarkParse from 'remark-parse';
-import remarkRehype from 'remark-rehype';
-import rehypeReact from 'rehype-react';
+import React from "react";
+import unified from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeReact from "rehype-react";
 
 const components = {
   // A mapping of tag names (lower case) to Components
@@ -51,22 +51,14 @@ const processor = unified()
 
 function createElement(component, props, children) {
   const Tag =
-    (components && component && components[component]) ||
-    component ||
-    'div';
+    (components && component && components[component]) || component || "div";
 
-  return (
-    <Tag {...props}>
-      {children}
-    </Tag>
-  );
+  return <Tag {...props}>{children}</Tag>;
 }
 
 export default function MdRenderer({ text }) {
   return (
-    <div className="MdRenderer">
-      {processor.processSync(text).contents}
-    </div>
+    <div className="MdRenderer">{processor.processSync(text).contents}</div>
   );
 }
 ```
@@ -86,21 +78,21 @@ This is a **Markdown** file
 There are three things to keep in mind:
 
 1. You need to include the closing tag (`</MyComponent>` in this case).
-  Custom void tags (e.g. `<MyComponent propName="..." />`) are not recognised properly by rehype, and will cause DOM nesting errors.
-  Valid HTML void tags (like `<input>` and `<img>`) still work.
+   Custom void tags (e.g. `<MyComponent propName="..." />`) are not recognised properly by rehype, and will cause DOM nesting errors.
+   Valid HTML void tags (like `<input>` and `<img>`) still work.
 2. All props must be strings.
 3. Element/Component names are case-insensitive.
-  rehype, used by the processor to manage HTML, puts all tag names in lowercase.
-  In this post, I type React components in UpperCamelCase to distinguish them from HTML elements.
+   rehype, used by the processor to manage HTML, puts all tag names in lowercase.
+   In this post, I type React components in UpperCamelCase to distinguish them from HTML elements.
 
 ### Markdown Processor
 
 I use [unified](https://unifiedjs.github.io/) and its syntaxes [remark](https://github.com/wooorm/remark) and [rehype](https://github.com/wooorm/rehype) to parse the Markdown. There is a large number of plugins available for this ecosystem, allowing you to add more features in (like [emoji :+1:](https://github.com/rhysd/remark-emoji)).
 
 ```js
-import remarkParse from 'remark-parse';
-import remarkRehype from 'remark-rehype';
-import rehypeReact from 'rehype-react';
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeReact from "rehype-react";
 
 // ...
 
@@ -114,11 +106,11 @@ const processor = unified()
 
 Using unified is simple enough, just `use()` any plugins you need. These three are neccesary, so make sure they're included.
 
-* remark-parse
+- remark-parse
   Transform Markdown into mdast tree (for remark plugins)
-* remark-rehype
+- remark-rehype
   Transform mdast tree into nlcst tree (for rehype plugins)
-* rehype-react
+- rehype-react
   Transform nlcst tree into React tree
 
 ### createElement()
@@ -126,7 +118,7 @@ Using unified is simple enough, just `use()` any plugins you need. These three a
 The rehype-react plugin converts the output from the rehype plugins into fully rendered React elements. It does this using React's [createElement](https://github.com/facebook/react/blob/master/packages/react/src/ReactElement.js#L175) function. However, it does not know about your custom components. In order to actually be able to use custom components, we need to override the createElement function to allow the components.
 
 ```js
-import React from 'react';
+import React from "react";
 
 // ...
 
@@ -134,14 +126,10 @@ function createElement(component, props, children) {
   const Tag =
     (components && component && components[component]) || // Get component from map if present
     component || // Otherwise just the string
-    'div'; // Default to div
+    "div"; // Default to div
 
   // And return the formed component
-  return (
-    <Tag {...props}>
-      {children}
-    </Tag>
-  );
+  return <Tag {...props}>{children}</Tag>;
 }
 ```
 
@@ -152,9 +140,7 @@ This is just a small pure functional component that takes a `text` property and 
 ```js
 export default function MdRenderer({ text }) {
   return (
-    <div className="MdRenderer">
-      {processor.processSync(text).contents}
-    </div>
+    <div className="MdRenderer">{processor.processSync(text).contents}</div>
   );
 }
 ```
