@@ -1,14 +1,14 @@
-import PostHeader from '../../components/PostHeader';
-import LargeLink from '../../components/LargeLink';
+import PostHeader from "../../components/PostHeader";
+import LargeLink from "../../components/LargeLink";
 
 export const metadata = {
-  title: 'Simple Run-time Type Checker',
-  description: 'Building a tiny type checker for Javascript',
-  bgcolor: '#CB3837',
-  date: new Date('2018-09-17T00:00'),
-  github: 's-thom/srttc',
+  title: "Simple Run-time Type Checker",
+  description: "Building a tiny type checker for Javascript",
+  bgcolor: "#CB3837",
+  date: new Date("2018-09-17T00:00"),
+  github: "s-thom/srttc",
   published: true,
-  featured: true,
+  featured: true
 };
 
 <PostHeader {...metadata} />
@@ -20,24 +20,21 @@ const matches = srttc(
   {
     foo: 5,
     bar: {
-      baz: [
-        new CoolObject(),
-        new CoolObject(),
-      ],
+      baz: [new CoolObject(), new CoolObject()],
       quz: {
-        quux: 'some weird string',
-      },
-    },
+        quux: "some weird string"
+      }
+    }
   },
   {
-    foo: 'number',
+    foo: "number",
     bar: {
       baz: srttc.arrayOf(CoolObject),
       quz: {
-        quux: 'string',
-      },
-    },
-  },
+        quux: "string"
+      }
+    }
+  }
 );
 ```
 

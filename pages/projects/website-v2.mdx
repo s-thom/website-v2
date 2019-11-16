@@ -1,14 +1,14 @@
-import PostHeader from '../../components/PostHeader';
-import LargeLink from '../../components/LargeLink';
+import PostHeader from "../../components/PostHeader";
+import LargeLink from "../../components/LargeLink";
 
 export const metadata = {
-  title: 'website-v2',
-  description: 'The very thing you\'re probably looking at',
-  img: '/static/posts/this-website/banner.png',
-  date: new Date('2019-07-24T17:40'),
-  github: 's-thom/website-v2',
+  title: "website-v2",
+  description: "The very thing you're probably looking at",
+  img: "/static/posts/this-website/banner.png",
+  date: new Date("2019-07-24T17:40"),
+  github: "s-thom/website-v2",
   published: true,
-  featured: true,
+  featured: true
 };
 
 <PostHeader {...metadata} />
@@ -16,7 +16,6 @@ export const metadata = {
 # I did it again
 
 I rewrote my website again. It looks the same as it did before. Looking at it that way makes me ask "why did you even do that?" Ultimately, the reason comes down to wanting to learn new things, and be able to evaluate which frameworks suit which jobs.
-
 
 ## Getting started with Next.js
 
@@ -51,10 +50,12 @@ The first thing was enabling Typescript by adding a `tsconfig.json` file. I real
 
 The next thing was [MDX](https://mdxjs.com) support. I've included more detail in my post about rebuilding this website with Next.js. There were a couple of interesting challenges that came up that I know know how to handle if they ever come up again.
 
-<LargeLink href="/posts/static-site-with-next-js" title="Creating a static website with Next.js" />
+<LargeLink
+  href="/posts/static-site-with-next-js"
+  title="Creating a static website with Next.js"
+/>
 
 Those are the main things, otherwise it's a pretty standard Next.js project. I didn't need anything fancy, as it's mostly just a simple blog.
-
 
 ## Old website
 

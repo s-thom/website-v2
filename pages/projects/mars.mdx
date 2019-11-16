@@ -1,23 +1,23 @@
-import PostHeader from '../../components/PostHeader';
+import PostHeader from "../../components/PostHeader";
 
 export const metadata = {
-  title: 'Mars',
-  description: 'Creating an app to send links between devices',
-  bgcolor: '#BD4A2E',
-  date: new Date('2017-06-18T12:00'),
-  edited: new Date('2017-11-23T09:41'),
-  github: 's-thom/MarsAndroid',
+  title: "Mars",
+  description: "Creating an app to send links between devices",
+  bgcolor: "#BD4A2E",
+  date: new Date("2017-06-18T12:00"),
+  edited: new Date("2017-11-23T09:41"),
+  github: "s-thom/MarsAndroid",
   published: true,
-  featured: true,
+  featured: true
 };
 
 <PostHeader {...metadata} />
 
 Sometimes I feel like dropping what I'm working on, and taking up another project for a weekend. That's exactly what sparked the creation of Mars.
 
-Mars is an experiment into [Microsoft's Project Rome](https://blogs.windows.com/buildingapps/2016/10/11/cross-device-experience-with-project-rome/#co1zlpQ31R9Lvvkx.97). Project Rome allows you to send URIs between Windows devices, and they recently opened it up so you can send from Android and iOS as well. You can find the docuemntation for Project Rome's API [on GitHub](https://github.com/Microsoft/project-rome). 
+Mars is an experiment into [Microsoft's Project Rome](https://blogs.windows.com/buildingapps/2016/10/11/cross-device-experience-with-project-rome/#co1zlpQ31R9Lvvkx.97). Project Rome allows you to send URIs between Windows devices, and they recently opened it up so you can send from Android and iOS as well. You can find the docuemntation for Project Rome's API [on GitHub](https://github.com/Microsoft/project-rome).
 
-I use an app on my phone to send links to my laptop if I want to check it out on a larger screen (good for longer videos). I wanted to see what it would be like to build a similar app, but using Project Rome as the platform. 
+I use an app on my phone to send links to my laptop if I want to check it out on a larger screen (good for longer videos). I wanted to see what it would be like to build a similar app, but using Project Rome as the platform.
 
 # Why the name Mars?
 
@@ -35,6 +35,6 @@ Then it's just a case of waiting for the user to share data to the app, which co
 
 # Conclusion
 
-A lot of the heavy lifting in the app was done by the library provided by Microsoft. That handled a lot of the login and sending, which meant that this could be a weekend experiment, instead of a week-long project. 
+A lot of the heavy lifting in the app was done by the library provided by Microsoft. That handled a lot of the login and sending, which meant that this could be a weekend experiment, instead of a week-long project.
 
 Right now I think the Project Rome API is a little limited on its own, and to do anything more complex requires the user to install an app on the receiving devices. Perhaps if there was more native support for actions such as copying to the clipboard then it would end up being a lot more useful.

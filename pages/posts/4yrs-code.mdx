@@ -1,13 +1,14 @@
-import PostHeader from '../../components/PostHeader';
-import Spoiler from '../../components/MdSpoiler';
+import PostHeader from "../../components/PostHeader";
+import Spoiler from "../../components/MdSpoiler";
 
 export const metadata = {
-  title: 'Four Years of Code',
-  description: 'A summary of the things I did in the 4 years I was at university.',
-  bgcolor: '#15181A',
-  date: new Date('2017-11-26T14:25'),
+  title: "Four Years of Code",
+  description:
+    "A summary of the things I did in the 4 years I was at university.",
+  bgcolor: "#15181A",
+  date: new Date("2017-11-26T14:25"),
   published: true,
-  featured: true,
+  featured: true
 };
 
 <PostHeader {...metadata} />
@@ -58,18 +59,18 @@ Unfortunately, I've lost the code for it. No great loss, though it was how I lea
 
 **Assignment, Semester B, COMP204**
 
-*[Repository](https://github.com/s-thom/uni-15B-204-BallGame/)*
+_[Repository](https://github.com/s-thom/uni-15B-204-BallGame/)_
 
 This assignment was set to assess many different things:
 
 1. **Object-Oriented program design**
-  That was the focus of COMP204
+   That was the focus of COMP204
 1. **Programming in groups**
-  This assignment was set for pairs of people. I worked with someone I met in the halls the previous year: [Tim](http://tmh.nz). I knew a little about git at this point, so decided to use it for this project, allowing us to work on different areas of the app at the same time. Not quite classic pair programming, but it still turned out well.
+   This assignment was set for pairs of people. I worked with someone I met in the halls the previous year: [Tim](http://tmh.nz). I knew a little about git at this point, so decided to use it for this project, allowing us to work on different areas of the app at the same time. Not quite classic pair programming, but it still turned out well.
 1. **Android's lifecycle**
-  Always an important thing to learn. This paper touched on why it was important, but more explanation came in COMP548.
+   Always an important thing to learn. This paper touched on why it was important, but more explanation came in COMP548.
 1. **Using sensors**
-  Sensors are what set mobile development apart from normal development. Thre's a weath of device information that can be gathered. This game needed to use the gyroscope to determine device orientation, and use that in the game.
+   Sensors are what set mobile development apart from normal development. Thre's a weath of device information that can be gathered. This game needed to use the gyroscope to determine device orientation, and use that in the game.
 
 Tim and I were able to complete our task, and create a game where a ball moves with gravity. So did everyone else in the class, of course. Theat was the goal of the assignment. It was interesting to look at other groups' apps and see how they were different.
 
@@ -77,8 +78,8 @@ Tim and I were able to complete our task, and create a game where a ball moves w
 
 **Personal Project**
 
-*[Repository (#1)](https://github.com/SecretOnline/NMS-Info/)*
-*[Repository (#2)](https://github.com/SecretOnline/Info-Repo/)*
+_[Repository (#1)](https://github.com/SecretOnline/NMS-Info/)_
+_[Repository (#2)](https://github.com/SecretOnline/Info-Repo/)_
 
 It was around this time that the video game [No Man's Sky](https://www.nomanssky.com/). Information on the game was relatively scarce, but work had been done on the [subreddit](https://www.reddit.com/r/NoMansSkyTheGame/) to collect it all. However, it was a bit of an annoyance to search through and provide links to. I set out to create an easily linkable and searchable collection of all the information about the game, complete with the sources for the information.
 
@@ -91,12 +92,12 @@ The website ended up being relatively popular throughout the community, which wa
 I learned two major things in making the Info Repo:
 
 1. **UI/UX Design**
-  While I had the basics before, this provided me with an opportunity to try new things, and really focus on how a website looked and felt. This ended up being my go-to look for all web projects I did for the next year. Inspiration from it still exists in most of my later projects.
-  By doing this, I learned that I actually liked design. Thinking about how users interact with software, and how we can reinforce the right behaviours, is an interesting subject. This project made me realise how important design (visual, application, user experience) is to software.
+   While I had the basics before, this provided me with an opportunity to try new things, and really focus on how a website looked and felt. This ended up being my go-to look for all web projects I did for the next year. Inspiration from it still exists in most of my later projects.
+   By doing this, I learned that I actually liked design. Thinking about how users interact with software, and how we can reinforce the right behaviours, is an interesting subject. This project made me realise how important design (visual, application, user experience) is to software.
 1. **The React framework**
-  Version 1 of the website was created without any libraries. Just pure Javascript. It showed me how I could create a full interactive single-page website. I learned a lot about DOM manipulation and trying to keep a larger file organised.
-  Version 2 was written using the React framework. This meant that I didn't have to directly worry about the DOM, and instead just declare the structure of the application.
-  The Info Repo proved to be a valuable practical lesson in using the React library, which I have used in many of my personal projects since.
+   Version 1 of the website was created without any libraries. Just pure Javascript. It showed me how I could create a full interactive single-page website. I learned a lot about DOM manipulation and trying to keep a larger file organised.
+   Version 2 was written using the React framework. This meant that I didn't have to directly worry about the DOM, and instead just declare the structure of the application.
+   The Info Repo proved to be a valuable practical lesson in using the React library, which I have used in many of my personal projects since.
 
 # Third Year
 
@@ -106,7 +107,7 @@ I learned two major things in making the Info Repo:
 
 [Repository](https://github.com/s-thom/uni-16A-316-Pathfinding/)
 
-This paper was taught using the functional language [Clojure](https://clojure.org/). The goal of this particular assignment was to implement pathfinding through an ASCII maze using [Breath First Search](https://en.wikipedia.org/wiki/Breadth-first_search), [Depth First Search](https://en.wikipedia.org/wiki/Depth-first_search), and [A*](https://en.wikipedia.org/wiki/A*_search_algorithm).
+This paper was taught using the functional language [Clojure](https://clojure.org/). The goal of this particular assignment was to implement pathfinding through an ASCII maze using [Breath First Search](https://en.wikipedia.org/wiki/Breadth-first_search), [Depth First Search](https://en.wikipedia.org/wiki/Depth-first_search), and [A\*](https://en.wikipedia.org/wiki/A*_search_algorithm).
 
 I ended up finding that working in a functional way was quite satisfying, and I started to use some of the ideas in other projects. It also helped me understand how to do state management better, which has saved me a lot of time, especially in larger projects.
 
@@ -126,7 +127,7 @@ Our solution, in the end, involved storing subscribers in three linked lists in 
 1. Received the message (to avoid duplicate sending)
 1. Haven't received the message, but haven't requested it (don't send message immediately, or will block the FS)
 
-It wasn't until we had submitted that we realised that we could have done it wihtout having to deal with transferring items between lists. Time pressure makes spaghetti code ~~possible~~ *probable*.
+It wasn't until we had submitted that we realised that we could have done it wihtout having to deal with transferring items between lists. Time pressure makes spaghetti code ~~possible~~ _probable_.
 
 In the end, I believe we were one of the few groups to finish that assignment, and we are one of the last. This assignment has since been removed from the course. I understand the reasons why, but it was a great challenge, one you could be proud of. This work in C was important to us both, especially to Jayden as his honours project was entirely C-based.
 
@@ -150,7 +151,7 @@ The bot has gone through many versions, often with major changes to its internal
 
 **Assignment, Semester A, COMP548**
 
-*[Repository](https://github.com/s-thom/uni-17A-548-ImageRecognition/)*
+_[Repository](https://github.com/s-thom/uni-17A-548-ImageRecognition/)_
 
 The second assignment for the mobile apps paper was to create an app that could request something using the network, store in in a database, share it to another application, and provide some additional functionality beyond requesting, storing, and sharing.
 
@@ -158,12 +159,12 @@ Since I knew the next one would involve using one the Google APIs, I thought I'd
 
 So I did. The app allows you to take photos (or pick from the gallery), send them off to Google, who sends back a list of what was recognised in the image.
 
-*Note to anyone wanting to use Cloud Vision: Pictures of flowers, cars, and animals are the fastest to process. Probably because of the large amout of training data available to the neural network.*
+_Note to anyone wanting to use Cloud Vision: Pictures of flowers, cars, and animals are the fastest to process. Probably because of the large amout of training data available to the neural network._
 
 ## eBook Reader
 
 **Honours Project, COMP520**
 
-*[Repository](https://github.com/s-thom/520-reader/)*
+_[Repository](https://github.com/s-thom/520-reader/)_
 
 This was made as part of my Honours project. I plan to write a fair bit more on that when I'm ready. I'm still thinking about exactly how I'll write about it.
