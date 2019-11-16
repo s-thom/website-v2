@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import './index.css';
+import "./index.css";
 
-interface OptionalProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+interface MdImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   nocaption?: boolean;
 }
 
-export default function MdImage(props: React.ImgHTMLAttributes<HTMLImageElement>) {
-  if ((props as OptionalProps).nocaption) {
-    const clone = {...props};
-    delete (clone as OptionalProps).nocaption;
-    return <img  {...props} />;
+export default function MdImage(props: MdImageProps) {
+  if (props.nocaption) {
+    const clone = { ...props };
+    delete clone.nocaption;
+    return <img {...props} />;
   }
 
   const caption = props.title || props.alt;

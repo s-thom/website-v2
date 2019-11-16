@@ -1,7 +1,7 @@
 import PostHeader from "../components/PostHeader";
 import PostHeaderList from "../components/PostHeaderList";
 import Link from "../components/Link";
-import MdImage from "../components/MdImage";
+import MediaPreview from "../components/MediaPreview";
 import important from "../data/important-videos.json";
 
 export const metadata = {
@@ -23,12 +23,6 @@ export const sortedLinks = important.sort(
 
 <div>
   {sortedLinks.map(link => (
-    <div>
-      <h3>
-        <Link href={link.link}>{link.title}</Link> -{" "}
-        <Link href={link.creator.link}>{link.creator.name}</Link>
-        <img alt={link.title} src={link.img} nocaption />
-      </h3>
-    </div>
+    <MediaPreview media={link} key={link.title} />
   ))}
 </div>
