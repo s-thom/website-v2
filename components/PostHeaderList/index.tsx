@@ -1,19 +1,17 @@
-import React from 'react';
-import Link from '../Link';
+import React from "react";
+import Link from "../Link";
 
-import PostHeaderPreview from '../PostHeaderPreview';
-import { PageMetadata } from '../../types';
+import PostHeaderPreview from "../PostHeaderPreview";
+import { PageMetadata } from "../../types";
 
-import './index.css';
+import "./index.css";
 
 interface Props {
   pages: PageMetadata[];
   showTypes?: boolean;
 }
 
-export default function PostHeaderList({
-  pages,
-}: Props) {
+export default function PostHeaderList({ pages }: Props) {
   const sorted = [...pages].sort((a, b) => {
     if (!a.date) {
       return -1;
@@ -26,24 +24,18 @@ export default function PostHeaderList({
   });
 
   return (
-    <ul className="PostHeaderList">{
-      sorted.map((page) => {
+    <ul className="PostHeaderList">
+      {sorted.map(page => {
         const info = { ...page };
 
-        const item = (
-          <PostHeaderPreview { ...info } />
-        );
+        const item = <PostHeaderPreview {...info} />;
 
         return (
-          <li className="PostHeaderList-item" key={ info.path }>
-            {info.path ? (
-              <Link href={info.path}>
-                {item}
-              </Link>
-            ) : item}
+          <li className="PostHeaderList-item" key={info.path}>
+            {info.path ? <Link href={info.path}>{item}</Link> : item}
           </li>
         );
-      })
-    }</ul>
+      })}
+    </ul>
   );
 }

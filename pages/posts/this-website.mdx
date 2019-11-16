@@ -1,13 +1,13 @@
-import PostHeader from '../../components/PostHeader';
-import LargeLink from '../../components/LargeLink';
+import PostHeader from "../../components/PostHeader";
+import LargeLink from "../../components/LargeLink";
 
 export const metadata = {
-  title: 'How this website is built',
-  description: '(Outdated) Building my website from scratch with React Static',
-  img: '/static/posts/this-website/banner.png',
-  date: new Date('2017-06-01T21:10'),
-  edited: new Date('2017-11-23T14:13'),
-  published: true,
+  title: "How this website is built",
+  description: "(Outdated) Building my website from scratch with React Static",
+  img: "/static/posts/this-website/banner.png",
+  date: new Date("2017-06-01T21:10"),
+  edited: new Date("2017-11-23T14:13"),
+  published: true
 };
 
 <PostHeader {...metadata} />
@@ -44,14 +44,17 @@ At a higher level, the two frameworks are quite similar. They both use React, st
 
 I've written more about how I generate the pages using React Static in another post:
 
-<LargeLink href="/posts/react-static-markdown/" title="Using Markdown with React Static" />
+<LargeLink
+  href="/posts/react-static-markdown/"
+  title="Using Markdown with React Static"
+/>
 
 # Why this website is open source
 
-*(In case you haven't clicked any of the relevant links on the page yet, here's [a link to the repository](https://github.com/s-thom/website/))*
+_(In case you haven't clicked any of the relevant links on the page yet, here's [a link to the repository](https://github.com/s-thom/website/))_
 
 "Stuart, ", you might ask, "why is your website open? What purpose could that possibly hold?".
 
-It comes down to the fact that if something has been done before, it will be done again. I have spent several hours typing away, modifying, adding bugs, and fixing those bugs again that I want to show how I solved those problems. There have been many times where I have referenced other people's code (and sometimes a *little more* than referencing) to figure ot a solution.
+It comes down to the fact that if something has been done before, it will be done again. I have spent several hours typing away, modifying, adding bugs, and fixing those bugs again that I want to show how I solved those problems. There have been many times where I have referenced other people's code (and sometimes a _little more_ than referencing) to figure ot a solution.
 
 Since I have come across issues in creating this website, I wanted to share my solutions, and have them there for those who need them. If you have any questions about any part of the website's repository and why I've made some of the decisions I have, ask away. If you have any suggestions as to how it can be improved, then let me know. Collaboration is what open source software is about.

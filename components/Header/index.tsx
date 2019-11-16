@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import Link from '../Link';
+import Link from "../Link";
 
-import './index.css';
+import "./index.css";
 
 const Header = () => (
   <header className="PageHeader">

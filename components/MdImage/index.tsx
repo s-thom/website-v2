@@ -1,8 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import './index.css';
+import "./index.css";
 
-export default function MdImage(props: React.ImgHTMLAttributes<HTMLImageElement>) {
+interface MdImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  nocaption?: boolean;
+}
+
+export default function MdImage(props: MdImageProps) {
+  if (props.nocaption) {
+    const clone = { ...props };
+    delete clone.nocaption;
+    return <img {...clone} />;
+  }
+
   const caption = props.title || props.alt;
   return (
     <figure className="FigureImage">

@@ -1,11 +1,11 @@
-import PostHeader from '../../components/PostHeader';
+import PostHeader from "../../components/PostHeader";
 
 export const metadata = {
-  title: 'Implementing Android\'s Direct Share',
-  description: 'Using Microsoft\'s URL sharing with Android\'s Direct Share API',
-  date: new Date('2017-06-18T12:10'),
+  title: "Implementing Android's Direct Share",
+  description: "Using Microsoft's URL sharing with Android's Direct Share API",
+  date: new Date("2017-06-18T12:10"),
   published: true,
-  featured: true,
+  featured: true
 };
 
 <PostHeader {...metadata} />
@@ -40,7 +40,6 @@ public class MyChooserService extends ChooserTargetService {
 ```
 
 Each `ChooserTarget` had a name, icon, priority, and optionally a `Bundle`. You will probably want to include the Bundle to differentiate which target was chosen. The documentation reccommends that the key starts with your package name.
-
 
 ```java
 // At class level

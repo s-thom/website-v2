@@ -1,0 +1,16 @@
+.MediaPreview {
+  text-align: center;
+}
+
+.MediaPreview-img {
+  max-height: 20em;
+  text-align: center;
+}
+
+.MediaPreview-heading {
+  margin: 1em;
+}
+
+.MediaPreview:not(:first-child) {
+  margin-top: 2em;
+}
