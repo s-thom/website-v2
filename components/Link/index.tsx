@@ -6,7 +6,7 @@ export default function Link(
 ) {
   const { href } = props;
 
-  const isExternalLink = href.match(/^(?:https?)?:?\/\/.*/);
+  const isExternalLink = href ? href.match(/^(?:https?)?:?\/\/.*/) : true;
   if (isExternalLink) {
     // External links should not be wrapped by next's Link
     return <a {...props} />;
