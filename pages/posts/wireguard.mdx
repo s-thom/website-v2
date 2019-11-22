@@ -1,8 +1,8 @@
 import PostHeader from "../../components/PostHeader";
 
 export const metadata = {
-  title: "Using Wireguard on a Raspberry Pi",
-  description: "The steps I took to set up Wireguard for my own use",
+  title: "Using WireGuard on a Raspberry Pi",
+  description: "The steps I took to set up WireGuard for my own use",
   bgcolor: "#88171A",
   date: new Date("2019-11-21T17:55"),
   published: false,
@@ -10,3 +10,156 @@ export const metadata = {
 };
 
 <PostHeader {...metadata} />
+
+Over the past week I've been setting up a Raspberry Pi, and one of the things I wanted to do with it is set up a LAN network so friends and I can play games together without relying on company-hosted solutions. I already use a VPN service that uses [WireGuard](https://www.wireguard.com/), so it seemed a natural place to start.
+
+I'm not going to lie, it took me a while to set up, but that was mostly me making little mistakes. If you're going to set something up, stop often and test what you've done. Don't do what I did and go through the entire process, then realise you missed something. I've split this post into (hopefully) digestable sections, and have included commands to ensure you've completed each step.
+
+# Setting up a WireGuard network
+
+For the sake of example, I'm going to assume the server machine is reachable at `192.168.0.2`, and that we want to create a network `10.100.100.0/24`.
+
+## Install WireGuard
+
+Instructions to install WireGuard on all of its platforms are [available on the WireGuard website](https://www.wireguard.com/install/). Most of the time you'll be able to use your system package manager. I'm going to assume some Debian-based distribution, as it's probably the most common.
+
+As I was doing this on a Raspberry Pi (running Raspbian), I needed to install some more before following the Debian instructions.
+
+```sh
+sudo apt-get update
+sudo apt-get install raspberrypi-kernel-headers libelf-dev libmnl-dev build-essential git dirmngr
+```
+
+Once the install has completed, reboot.
+
+To check that WireGuard is installed:
+
+```sh
+which wg
+which wg-quick
+```
+
+## Generating keys
+
+```sh
+wg genkey | tee private_key | wg pubkey > public_key
+```
+
+If you haven't seen `tee` before, it writes STDIN to the file (in this case private*key) \_and* also sends it to STDOUT, allowing it to go to the public key generator.
+
+You will want to generate (at least) two key pairs. One for the server, and one for each client that will connect.
+
+To check the keys were generated, well, look at the files. You should have some nice random Base64 strings.
+
+## Configurations
+
+WireGuard configuration files go into `/etc/wireguard/`, and should only be read/write by `root`. Since the name of the file is used for the network interface later, the name should be less than 15 characters. In this example I'll call the first interface `wg0`, as it's consistent with convention and it's pretty common in other tutorials online.
+
+### Server
+
+This file ends up on the server in `/etc/wireguard/`. It defines a network interface, as well as any peers that will be allowed to connect to it.
+
+```conf
+# /etc/wireguard/wg0.conf
+
+[Interface]
+# This interface will be at `10.100.100.1` on this network,
+# and the network will be from `10.100.100.0` to `10.100.100.255` (a /24 in CIDR notation)
+Address = 10.100.100.1/24
+# Optional, DNS
+# If you're doing what I do and run this on a Raspberry Pi with a PiHole, set this to the address of the interface
+# Otherwise choose your favourite DNS server
+DNS = 10.100.100.1
+# This should be one of the keys you generated earlier
+PrivateKey = <server-private-key>
+# PostUp and PostDown are run after the tunnel goes up and down, respectively
+# %i is replaced with the name of the WireGuard interface when run
+# Each is in three parts:
+# 1. Allow traffic into the interface
+# 2. Allow traffic out of the interface
+# 3. Route traffic through `eth0` (in this case)
+# `eth0` should be replaced with whichever interface is internet-facing
+PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+```
+
+If you want to test this stage, try running `sudo wg-quick up wg0`. It'll output some things, and now the interface is running. Run `sudo wg` to see an overview of the interfaces currently running. `sudo wg-quick down wg0` to take the interface down. Now that you have an interface, you'll need to allow users to connect. Add the following to the end of `wg0.conf`:
+
+```conf
+[Peer]
+# Important: this is the peer's public key, not private. The server never sees the private key. It's private
+PublicKey = <peer-public-key>
+# The IP the peer will be given when it connects. /32 means that is can only claim this address
+# It will still be able to reach everything, this is just defining what the peer is
+AllowedIPs = 10.100.100.10/32
+```
+
+You can specify more peers by adding more `[Peer]` sections to the file.
+
+Try running `sudo wg-quick up wg0` now, and see that the peer section shows in the output.
+
+### Peer
+
+This configuration will end up on the peering machine in its `/etc/wireguard` folder.
+
+```conf
+[Interface]
+# This should match the AllowedIPs section in the server's peer section
+Address = 10.100.100.10/32
+PrivateKey = <peer-private-key>
+
+[Peer]
+PublicKey = <server-public-key>
+# Address of the server on our local network
+# Of course, this could be any address that refers to the server
+# Wireguard runs on port 51820 by default
+Endpoint = 192.168.0.2:51820
+# The IP range that the peer can access through the tunnel
+# Set to 0.0.0.0/0 for all IPv4 traffic, and ::/0 for all IPv6
+# This is comma separated, so multiple ranges can be added
+AllowedIPs = 10.100.100.0/24
+
+PersistentKeepalive = 25
+```
+
+## Running WireGuard
+
+`wg-quick` is the easiest way of setting up and starting the interfaces.
+
+A note for Windows users. Windows Firewall blocks incoming ICMP packets on untrusted networks by default. You will need to go into the firewall, and add an incoming rule to allow the ICMP protocol through.
+
+## Start on boot
+
+`wg-quick` can also be used as a service, which makes this so much easier.
+
+```sh
+sudo systemcyl enable wg-quick@wg0
+```
+
+# Connecting to an upstream WireGuard VPN
+
+Since my home network is behind NAT (and CGNAT from my ISP), I need a way to connect to my WireGuard network from the general internet. As mentioned earlier, I already use a VPN service that provides WireGuard, and allows limited port-forwarding. While I can't choose the port numbers, I can select which device to forward the packets to. Let's say the port that is forwarded is `1234`.
+
+It is worth noting that on userspace implementations of WireGuard (e.g. Windows, Android without root) can only have one connection at a time, so running multiple interfaces should be done on a Linux server.
+
+The first step is to change the port number the interface is running on. This involves changing the peers too.
+
+```conf
+# /etc/wireguard/wg0.conf
+
+[Interface]
+ListenPort = 1234
+```
+
+```conf
+# peer.conf
+
+[Peer]
+Endpoint = 192.168.0.2:1234
+```
+
+Then take the `.conf` file your provider would have given you and move it into `/etc/wireguard` on the server.
+
+There is one final change to make to the server's interface configuration. In the `PostUp` and `PostDown` rules the interface being used is `eth0`, or whatever is internet-facing. This must change to the upstream VPN interface.
+
+Bring up both interfaces, and test it out.
