@@ -4,9 +4,9 @@ export const metadata = {
   title: "Using WireGuard on a Raspberry Pi",
   description: "The steps I took to set up WireGuard for my own use",
   bgcolor: "#88171A",
-  date: new Date("2019-11-21T17:55"),
-  published: false,
-  featured: false
+  date: new Date("2019-11-22T17:55"),
+  published: true,
+  featured: true
 };
 
 <PostHeader {...metadata} />
@@ -17,15 +17,15 @@ I'm not going to lie, it took me a while to set up, but that was mostly me makin
 
 # Setting up a WireGuard network
 
-For the sake of example, I'm going to assume the server machine is reachable at `192.168.0.2`, and that we want to create a network `10.100.100.0/24`.
+For the sake of example, I'm going to assume the server machine is reachable at `192.168.0.2`, and that we want to create a network `10.100.100.0/24`. I'm going to assume some Debian-based distribution, as it's probably the most common.
 
 ## Install WireGuard
 
-Instructions to install WireGuard on all of its platforms are [available on the WireGuard website](https://www.wireguard.com/install/). Most of the time you'll be able to use your system package manager. I'm going to assume some Debian-based distribution, as it's probably the most common.
+Instructions to install WireGuard on all of its platforms are [available on the WireGuard website](https://www.wireguard.com/install/). Most of the time you'll be able to use your system package manager.
 
 As I was doing this on a Raspberry Pi (running Raspbian), I needed to install some more before following the Debian instructions.
 
-```sh
+```
 sudo apt-get update
 sudo apt-get install raspberrypi-kernel-headers libelf-dev libmnl-dev build-essential git dirmngr
 ```
@@ -34,14 +34,14 @@ Once the install has completed, reboot.
 
 To check that WireGuard is installed:
 
-```sh
+```
 which wg
 which wg-quick
 ```
 
 ## Generating keys
 
-```sh
+```
 wg genkey | tee private_key | wg pubkey > public_key
 ```
 
@@ -59,7 +59,7 @@ WireGuard configuration files go into `/etc/wireguard/`, and should only be read
 
 This file ends up on the server in `/etc/wireguard/`. It defines a network interface, as well as any peers that will be allowed to connect to it.
 
-```conf
+```
 # /etc/wireguard/wg0.conf
 
 [Interface]
@@ -85,7 +85,7 @@ PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACC
 
 If you want to test this stage, try running `sudo wg-quick up wg0`. It'll output some things, and now the interface is running. Run `sudo wg` to see an overview of the interfaces currently running. `sudo wg-quick down wg0` to take the interface down. Now that you have an interface, you'll need to allow users to connect. Add the following to the end of `wg0.conf`:
 
-```conf
+```
 [Peer]
 # Important: this is the peer's public key, not private. The server never sees the private key. It's private
 PublicKey = <peer-public-key>
@@ -102,7 +102,7 @@ Try running `sudo wg-quick up wg0` now, and see that the peer section shows in t
 
 This configuration will end up on the peering machine in its `/etc/wireguard` folder.
 
-```conf
+```
 [Interface]
 # This should match the AllowedIPs section in the server's peer section
 Address = 10.100.100.10/32
@@ -124,7 +124,7 @@ PersistentKeepalive = 25
 
 ## Running WireGuard
 
-`wg-quick` is the easiest way of setting up and starting the interfaces.
+`wg-quick` is the easiest way of setting up and starting the interfaces. As mentioned before, `sudo wg-quick up wg0` will bring up the interface. Once you've started the interface on the server, connect to it from the peer. You should now be able to ping from the peer to `10.100.100.1`, and from the server to `10.100.100.10`.
 
 A note for Windows users. Windows Firewall blocks incoming ICMP packets on untrusted networks by default. You will need to go into the firewall, and add an incoming rule to allow the ICMP protocol through.
 
@@ -132,34 +132,38 @@ A note for Windows users. Windows Firewall blocks incoming ICMP packets on untru
 
 `wg-quick` can also be used as a service, which makes this so much easier.
 
-```sh
+```
 sudo systemcyl enable wg-quick@wg0
 ```
 
 # Connecting to an upstream WireGuard VPN
 
-Since my home network is behind NAT (and CGNAT from my ISP), I need a way to connect to my WireGuard network from the general internet. As mentioned earlier, I already use a VPN service that provides WireGuard, and allows limited port-forwarding. While I can't choose the port numbers, I can select which device to forward the packets to. Let's say the port that is forwarded is `1234`.
+Since my home network is behind NAT (and CGNAT from my ISP), I need a way to connect to my WireGuard network from the general internet. As mentioned earlier, I already use a VPN service that provides WireGuard connectivity, and allows limited port-forwarding. While I can't choose the port numbers, I can select which device to forward the packets to. In this example, let's say the port that is forwarded is `1234`.
 
 It is worth noting that on userspace implementations of WireGuard (e.g. Windows, Android without root) can only have one connection at a time, so running multiple interfaces should be done on a Linux server.
 
 The first step is to change the port number the interface is running on. This involves changing the peers too.
 
-```conf
+```
 # /etc/wireguard/wg0.conf
 
 [Interface]
 ListenPort = 1234
 ```
 
-```conf
+```
 # peer.conf
 
 [Peer]
 Endpoint = 192.168.0.2:1234
 ```
 
-Then take the `.conf` file your provider would have given you and move it into `/etc/wireguard` on the server.
+Then take the `.conf` file your provider would have given you and move it into `/etc/wireguard` on the server. There is one final change to make to the server's interface configuration. In the `PostUp` and `PostDown` rules the interface being used is `eth0`, or whatever is internet-facing. This must change to the upstream VPN interface.
 
-There is one final change to make to the server's interface configuration. In the `PostUp` and `PostDown` rules the interface being used is `eth0`, or whatever is internet-facing. This must change to the upstream VPN interface.
+In order for a peer to make use of this, change its own `AllowedIPs` to `0.0.0.0/0`. Anything that can't be routed directly by the server will be sent through the upstream VPN.
 
 Bring up both interfaces, and test it out.
+
+# The end
+
+By the end you should have two interfaces on the server: one for the upstream VPN, and the other for your new network. Your network in masqueraded through the upstream interface for anything that can't be reached directly by the server.
