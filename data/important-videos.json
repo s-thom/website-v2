@@ -10,6 +10,16 @@
     "dateAdded": "2019-11-24T10:11:11.951Z"
   },
   {
+    "title": "Functional Programming in 40 Minutes",
+    "img": "https://img.youtube.com/vi/0if71HOyVjY/maxresdefault.jpg",
+    "link": "https://www.youtube.com/watch?v=0if71HOyVjY",
+    "author": {
+      "name": "Russ Olsen",
+      "link": "http://russolsen.com/"
+    },
+    "dateAdded": "2019-11-17T12:11:11.951Z"
+  },
+  {
     "title": "The Smallest MIDI Synth Again...",
     "img": "https://img.youtube.com/vi/KTvVS8guBsY/maxresdefault.jpg",
     "link": "https://www.youtube.com/watch?v=KTvVS8guBsY",
