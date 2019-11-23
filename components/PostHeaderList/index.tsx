@@ -32,7 +32,13 @@ export default function PostHeaderList({ pages }: Props) {
 
         return (
           <li className="PostHeaderList-item" key={info.path}>
-            {info.path ? <Link href={info.path}>{item}</Link> : item}
+            {info.path ? (
+              <Link href={info.path} aria-label={info.title}>
+                {item}
+              </Link>
+            ) : (
+              item
+            )}
           </li>
         );
       })}
