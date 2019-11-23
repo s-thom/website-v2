@@ -51,8 +51,8 @@ export default function DefaultHeadMetadata() {
         key="ms-icon-70"
       />
       {/* General Properties */}
-      <link rel="author" href="/static/humans.txt" key="humans" />
-      <link rel="manifest" href="/static/manifest.json" key="manifest" />
+      <link rel="author" href="/humans.txt" key="humans" />
+      <link rel="manifest" href="/manifest.json" key="manifest" />
       {/* Icons */}
       <link
         rel="icon"
