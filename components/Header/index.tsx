@@ -11,7 +11,7 @@ const Header = () => (
         <div className="PageHeader-me">
           <img
             className="PageHeader-meImg"
-            src="/static/img/me.jpg"
+            src="/static/img/profile.jpg"
             alt="Portrait of Stuart Thomson"
           />
         </div>
