@@ -1,6 +1,6 @@
 .PageHeader {
-  color: #EEE;
-  background: #15181A;
+  color: #eee;
+  background: #15181a;
   width: 100%;
 }
 
@@ -36,7 +36,7 @@
   font-size: 2.5em;
   margin: 0;
   padding: 0.5em;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
 }
 
 .PageHeader-link {

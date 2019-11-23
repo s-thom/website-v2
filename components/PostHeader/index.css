@@ -10,10 +10,10 @@
   justify-content: space-between;
   position: relative;
   background-color: #fff;
-  color: #15181A;
-  fill: #15181A;
+  color: #15181a;
+  fill: #15181a;
   padding: calc(1em - 1px) calc(1.5em - 1px);
-  border: 1px #15181A solid;
+  border: 1px #15181a solid;
 }
 
 .PostHeader-headerWColor,
@@ -46,7 +46,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  content: ' ';
+  content: " ";
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.6);

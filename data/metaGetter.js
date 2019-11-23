@@ -25,7 +25,7 @@ function getPageMeta(pagePath) {
 
   return {
     ...meta,
-    path: pagePath.replace(/\.mdx?$/, ""),
+    path: pagePath.replace(/\.mdx?$/, "")
   };
 }
 
@@ -35,10 +35,7 @@ function getPageMeta(pagePath) {
  * @returns {boolean}
  */
 function filterPublishedPages(pageMeta) {
-  return (
-    pageMeta.published &&
-    true // This line is purely for making diffs nicer if more conditions are added
-  );
+  return pageMeta.published; // This line is purely for making diffs nicer if more conditions are added
 }
 
 /**
@@ -48,9 +45,7 @@ function filterPublishedPages(pageMeta) {
  */
 function filterFeaturedPages(pageMeta) {
   return (
-    pageMeta.published &&
-    pageMeta.featured &&
-    true // This line is purely for making diffs nicer if more conditions are added
+    pageMeta.published && pageMeta.featured // This line is purely for making diffs nicer if more conditions are added
   );
 }
 
@@ -99,7 +94,7 @@ function getAllPages(folderPath) {
   return fs
     .readdirSync(path.join(PAGES_DIR, folderPath))
     .filter(file => file.match(PAGE_REGEX))
-    .map((filename) => getPageMeta(path.join(folderPath, filename)))
+    .map(filename => getPageMeta(path.join(folderPath, filename)))
     .filter(filterPublishedPages)
     .sort(sortPages);
 }
@@ -109,12 +104,11 @@ function getAllPages(folderPath) {
  * @returns {PageMetadata[]}
  */
 function getFeaturedPages(folderPath) {
-  return getAllPages(folderPath)
-    .filter(filterFeaturedPages);
+  return getAllPages(folderPath).filter(filterFeaturedPages);
 }
 
 module.exports = {
   getPageMeta,
   getAllPages,
-  getFeaturedPages,
+  getFeaturedPages
 };

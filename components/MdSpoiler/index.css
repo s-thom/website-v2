@@ -1,5 +1,5 @@
 .MdSpoiler {
-  border: 1px solid #15181A;
+  border: 1px solid #15181a;
 }
 
 .MdSpoiler-title,
@@ -9,7 +9,7 @@
 
 .MdSpoiler-text {
   transition: background-color 0.2s ease-out;
-  background-color: #15181A;
+  background-color: #15181a;
 }
 
 .MdSpoiler-text:hover {

@@ -1,6 +1,6 @@
 .PageFooter {
-  color: #EEE;
-  background: #15181A;
+  color: #eee;
+  background: #15181a;
   text-align: center;
   width: 100%;
 }
@@ -9,7 +9,7 @@
 .PageFooter a:hover,
 .PageFooter a:active,
 .PageFooter a:visited {
-  color: #EEE;
+  color: #eee;
 }
 
 .PageFooter-text {
