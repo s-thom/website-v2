@@ -17,7 +17,8 @@
 }
 
 .PageFooter-fade,
-.PageFooter-svg {
+.PageFooter-svg,
+.PageFooter-link-text {
   opacity: 0.5;
 }
 
@@ -35,4 +36,8 @@
   fill: #fff;
   position: relative;
   top: 0.2em;
+}
+
+.PageFooter-link-text {
+  font-size: 0.9em;
 }

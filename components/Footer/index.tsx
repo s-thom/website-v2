@@ -32,6 +32,11 @@ export default function Footer() {
             </svg>
           </span>
         </a>
+        <a href="https://matrix.to/#/@me:sthom.kiwi">
+          <span className="PageFooter-link-text" aria-label="Matrix">
+            [M]
+          </span>
+        </a>
         <span className="PageFooter-fade"> | </span>
         <span className="PageFooter-fade">
           <a
