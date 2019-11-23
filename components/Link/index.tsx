@@ -9,7 +9,7 @@ export default function Link(
   const isExternalLink = href ? href.match(/^(?:https?)?:?\/\/.*/) : true;
   if (isExternalLink) {
     // External links should not be wrapped by next's Link
-    return <a {...props} />;
+    return <a {...props} rel="noreferrer" />;
   } else {
     // Clone props for <a>, but remove the href
     const linkProps = { ...props };
