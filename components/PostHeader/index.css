@@ -56,7 +56,6 @@
 .PostHeader-detail {
   z-index: 1;
   display: flex;
-  align-items: flex-end;
 }
 
 .PostHeader-items {
@@ -95,5 +94,11 @@
 }
 
 .PostHeader-type {
+  margin: 0;
+}
+
+.PostHeader-unpublished {
+  font-weight: bold;
+  font-style: italic;
   margin: 0;
 }

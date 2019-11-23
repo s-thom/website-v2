@@ -160,6 +160,9 @@ export default function PostHeader(props: PostHeaderProps) {
         <div className="PostHeader-items">{headList}</div>
         <div className="PostHeader-date">{dateNodes}</div>
       </div>
+      {!props.published && (
+        <p className="PostHeader-unpublished">Unpublished</p>
+      )}
     </header>
   );
 }
