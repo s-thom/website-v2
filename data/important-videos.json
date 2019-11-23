@@ -1,5 +1,15 @@
 [
   {
+    "title": "A Flawed Masterpiece - A Rogue One Video Essay",
+    "img": "https://img.youtube.com/vi/xOyD0zHQFsU/maxresdefault.jpg",
+    "link": "https://www.youtube.com/watch?v=xOyD0zHQFsU",
+    "author": {
+      "name": "Ladyknightthebrave",
+      "link": "https://www.youtube.com/channel/UC7pBv8EE3FtDZEF3HtnbFjA"
+    },
+    "dateAdded": "2019-11-24T10:11:11.951Z"
+  },
+  {
     "title": "The Smallest MIDI Synth Again...",
     "img": "https://img.youtube.com/vi/KTvVS8guBsY/maxresdefault.jpg",
     "link": "https://www.youtube.com/watch?v=KTvVS8guBsY",
@@ -10,7 +20,7 @@
     "dateAdded": "2019-11-16T07:11:11.951Z"
   },
   {
-    "title": "\"Hello, world\" from scratch on a 6502",
+    "title": "World's worst video card? The exciting conclusion",
     "img": "https://img.youtube.com/vi/uqY3FMuMuRo/maxresdefault.jpg",
     "link": "https://www.youtube.com/watch?v=uqY3FMuMuRo",
     "author": {
