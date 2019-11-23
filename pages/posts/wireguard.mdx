@@ -25,7 +25,7 @@ Instructions to install WireGuard on all of its platforms are [available on the 
 
 As I was doing this on a Raspberry Pi (running Raspbian), I needed to install some more before following the Debian instructions.
 
-```
+```bash
 sudo apt-get update
 sudo apt-get install raspberrypi-kernel-headers libelf-dev libmnl-dev build-essential git dirmngr
 ```
@@ -34,14 +34,14 @@ Once the install has completed, reboot.
 
 To check that WireGuard is installed:
 
-```
+```bash
 which wg
 which wg-quick
 ```
 
 ## Generating keys
 
-```
+```bash
 wg genkey | tee private_key | wg pubkey > public_key
 ```
 
@@ -59,7 +59,7 @@ WireGuard configuration files go into `/etc/wireguard/`, and should only be read
 
 This file ends up on the server in `/etc/wireguard/`. It defines a network interface, as well as any peers that will be allowed to connect to it.
 
-```
+```ini
 # /etc/wireguard/wg0.conf
 
 [Interface]
@@ -85,7 +85,7 @@ PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACC
 
 If you want to test this stage, try running `sudo wg-quick up wg0`. It'll output some things, and now the interface is running. Run `sudo wg` to see an overview of the interfaces currently running. `sudo wg-quick down wg0` to take the interface down. Now that you have an interface, you'll need to allow users to connect. Add the following to the end of `wg0.conf`:
 
-```
+```ini
 [Peer]
 # Important: this is the peer's public key, not private. The server never sees the private key. It's private
 PublicKey = <peer-public-key>
@@ -102,7 +102,7 @@ Try running `sudo wg-quick up wg0` now, and see that the peer section shows in t
 
 This configuration will end up on the peering machine in its `/etc/wireguard` folder.
 
-```
+```ini
 [Interface]
 # This should match the AllowedIPs section in the server's peer section
 Address = 10.100.100.10/32
@@ -132,7 +132,7 @@ A note for Windows users. Windows Firewall blocks incoming ICMP packets on untru
 
 `wg-quick` can also be used as a service, which makes this so much easier.
 
-```
+```bash
 sudo systemcyl enable wg-quick@wg0
 ```
 
@@ -144,14 +144,14 @@ It is worth noting that on userspace implementations of WireGuard (e.g. Windows,
 
 The first step is to change the port number the interface is running on. This involves changing the peers too.
 
-```
+```ini
 # /etc/wireguard/wg0.conf
 
 [Interface]
 ListenPort = 1234
 ```
 
-```
+```ini
 # peer.conf
 
 [Peer]
