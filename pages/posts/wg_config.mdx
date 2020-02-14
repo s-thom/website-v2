@@ -1,0 +1,77 @@
+import PostHeader from "../../components/PostHeader";
+
+export const metadata = {
+  title: "Making WireGuard configuration easier with scripts",
+  description: "Using wg_config to make the tedious tasks a single command",
+  bgcolor: "#88171A",
+  date: new Date("2020-02-15T09:07"),
+  published: true,
+  featured: true
+};
+
+<PostHeader {...metadata} />
+
+In [my original post on Wireguard](/posts/wireguard), I went through setting up the interfaces manually. This was good for learning how Wireguard works, but it gets annoying once you start adding more devices.
+
+While researching on how to get Wireguard set up, I found (and probably everyone else will find as well) [this GitHub README by adrianmihalko](https://github.com/adrianmihalko/raspberrypiwireguard) explaining all the steps. It wasn't until later that I re-read it, specifically section #2:
+
+> **2. Configuring WireGuard**
+>
+> We cover two way of setting up Wireguard and clients:
+>
+> - manually: that's what we do in this document
+> - semi automatic mode via [WireGuard User Management Script](https://github.com/adrianmihalko/raspberrypiwireguard/wiki/User-management-with-Wireguard-User-Management-script)
+
+That was the only mention of the user management script in the entire document, and it would have saved me a lot of time if I had seen it earlier. So, I went digging, and found that the project has [been forked a few times](https://github.com/adrianmihalko/wg_config/network/members), with very few of the changed being merged upstream. So, I thought, what's the harm in making one more.
+
+# [s-thom/wg_config](https://github.com/s-thom/wg_config)
+
+In this post I want to cover the basic usage, and what I learned about the script while making the modifications I wanted. That might sound a bit odd, because I'm meant to know everything about the script that I'm writing a post on my website about, but I came into this completely blind, not knowing how it worked, and wanting to adapt it to my needs.
+
+## Dependencies
+
+There are two dependencies for the script.
+
+- Wireguard itself. Of course, the script won't do anythign if you don't have it installed
+- `qrencode`. When generating users the script will output QR codes, so mobile device setup can be done faster.
+
+## Basic usage
+
+The purpose of the script is to add/remove peers from the interface. It doesn't do much beyond that. As such, it expects you to already have an interface running. If you haven't got one up already, I have some instructions in the **Server** section on [my other Wireguard post](/posts/wireguard).
+
+Once you've `git clone`d the repository, there's some files to configure.
+
+- `wg.def`  
+   `wg.def` is the main configuration file for the script. It sets variables used by the script. I have a [table of the variables and their purpose](https://github.com/s-thom/wg_config#configuration) in the README of the script. A sample file is provided as `wg.def.sample`.
+- `server.conf.tpl`  
+   `server.conf.tpl` is the template for your server's Wireguard config. Any variables used in here will be replaced with their values in `wg.def`.
+- `client.conf.tpl`  
+   `client.conf.tpl` is like the above, but for each of the peers that get generated. One of the first modifications I did was to add the DNS entry into this file.
+
+One important thing to note about the script is that it will only change the peers on an interface, nothing else. If you modify the `_OUTBOUND_INTERFACE` or other variables, no change to the interface will happen unless you `wg-quick down` and `wg-quick up` it.
+
+Once you have the variables set in `wg.def`, addins a user is as simple as running a command:
+
+```bash
+sudo ./users.sh -a <peer-name>
+```
+
+The rest of the script is recorded in the README.
+
+## Using the script on a pre-configured interface
+
+If you're like me and only finding this script _after_ you've configured an interface manually, then finding out how to make it work without causing conflicts is a bit of a pain. Luckilly, I've gone through that, and know (a bit more about) what I'm doing.
+
+### .available_ip
+
+This file is generated the first time the script runs. I also added `./users.sh -g` to generate this file on the first run without affecting anything else. This command has no effect if the file already exists.
+
+It contains a list of IPs suffixed with the network prefix length (e.g. `192.168.0.1/24`). When creating a new user, the first line of this file is used.
+
+If you're coming from a pre-configured interface, run `./users.sh -g` and remove the lines for any already configured peers.
+
+### .saved
+
+`.saved` Is probably the most important file in the entire thing. When generating users, the script doesn't look at the interface to get the peers. It also doesn't scan the `users` directory to see what peers have been made before. Instead, all information about what peers are on the interface is in `.saved`. Each line looks something like: `<client-name> <client-ip>/<subnet-size> <client-public-key>`.
+
+If you've got a pre-configured interface, you'll need to make a `.saved` file with one line for each peer.
