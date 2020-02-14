@@ -5,11 +5,14 @@ export const metadata = {
   description: "The steps I took to set up WireGuard for my own use",
   bgcolor: "#88171A",
   date: new Date("2019-11-22T17:55"),
+  edited: new Date("2020-02-15T09:07"),
   published: true,
   featured: true
 };
 
 <PostHeader {...metadata} />
+
+_Edit: This post covers setting up and configuring an interface manually. If you want to semi-automate the addition of new peers, then [there's a post for that too](/posts/wg_config)._
 
 Over the past week I've been setting up a Raspberry Pi, and one of the things I wanted to do with it is set up a LAN network so friends and I can play games together without relying on company-hosted solutions. I already use a VPN service that uses [WireGuard](https://www.wireguard.com/), so it seemed a natural place to start.
 
