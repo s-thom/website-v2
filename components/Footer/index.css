@@ -41,3 +41,12 @@
 .PageFooter-link-text {
   font-size: 0.9em;
 }
+
+.PageFooter-button {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  font-size: 1em;
+}

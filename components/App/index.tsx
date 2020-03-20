@@ -14,12 +14,30 @@ interface ComponentMap {
   [id: string]: React.ComponentType;
 }
 
+interface MyAppState {
+  editable: boolean;
+}
+
 const componentsMap: ComponentMap = {
   a: Link,
   img: MdImage
 };
 
-export default class MyApp extends App {
+export default class MyApp extends App<any, any, MyAppState> {
+  public constructor(props: any) {
+    super(props);
+
+    this.state = {
+      editable: false
+    };
+
+    this.toggleEditable = this.toggleEditable.bind(this);
+  }
+
+  public toggleEditable() {
+    this.setState({ editable: !this.state.editable });
+  }
+
   public render() {
     const { Component, pageProps } = this.props;
 
@@ -29,10 +47,10 @@ export default class MyApp extends App {
         <MDXProvider components={componentsMap}>
           <div className="App">
             <Header />
-            <div className="App-content">
+            <div className="App-content" contentEditable={this.state.editable}>
               <Component {...pageProps} />
             </div>
-            <Footer />
+            <Footer onEditClick={this.toggleEditable} />
           </div>
         </MDXProvider>
       </>
