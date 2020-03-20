@@ -110,6 +110,11 @@ export default function DefaultHeadMetadata() {
         href="/static/icon/apple-57.png"
         key="apple-icon-57"
       />
+      <link
+        rel="stylesheet"
+        href="https://indestructibletype.com/fonts/Jost.css"
+        type="text/css"
+      />
     </Head>
   );
 }
