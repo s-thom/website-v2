@@ -13,6 +13,6 @@
 
 @media (min-width: 900px) {
   .App-content {
-    width: 70em;
+    max-width: 60em;
   }
 }
