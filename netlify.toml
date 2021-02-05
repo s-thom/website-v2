@@ -5,6 +5,14 @@
     Access-Control-Allow-Origin = "*"
 
 [[redirects]]
+  from = "/.well-known/matrix/*"
+  to = "https://matrix.sthom.kiwi/.well-known/matrix/:splat"
+  status = 200
+  force = true
+  [redirects.headers]
+    Access-Control-Allow-Origin = "*"
+
+[[redirects]]
   from = "/.well-known/*"
   to = "/static/dot-well-known/:splat"
   status = 200
