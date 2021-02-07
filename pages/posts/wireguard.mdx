@@ -48,7 +48,7 @@ which wg-quick
 wg genkey | tee private_key | wg pubkey > public_key
 ```
 
-If you haven't seen `tee` before, it writes STDIN to the file (in this case private*key) \_and* also sends it to STDOUT, allowing it to go to the public key generator.
+If you haven't seen `tee` before, it writes STDIN to the file (in this case private_key) _and_ also sends it to STDOUT, allowing it to go to the public key generator.
 
 You will want to generate (at least) two key pairs. One for the server, and one for each client that will connect.
 
