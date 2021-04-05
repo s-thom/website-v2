@@ -17,7 +17,7 @@ export default function PageMeta({
     <meta property="og:title" content={title} key="og-title" />,
     <meta
       property="og:url"
-      content={`https://sthom.kiwi${path}`}
+      content={`https://archive-2020.sthom.kiwi${path}`}
       key="og-url"
     />,
     <meta
