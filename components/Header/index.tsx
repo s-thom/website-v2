@@ -20,6 +20,7 @@ const Header = () => (
         </div>
       </Link>
     </nav>
+    <div className="PageHeader-archive">This website is archived. <a href="/">Read more...</a></div>
   </header>
 );
 

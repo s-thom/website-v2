@@ -60,3 +60,9 @@
   height: 1.5rem;
   vertical-align: middle;
 }
+
+.PageHeader-archive {
+  text-align: center;
+  color: #15181a;
+  background-color: blanchedalmond;
+}
